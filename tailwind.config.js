@@ -14,10 +14,19 @@ module.exports = {
       },
       colors: {
         customGray: "#888DA7",
+        customBlack: "#161616",
+        searchBarGray: "#3B3B3B",
       },
       fontFamily: {
         Tenor: ["Tenor Sans"],
         Work: ["Work Sans"],
+        Poppins: ["Poppins"],
+        Lato: ["Lato"],
+        Mulish: ["Mulish"],
+        satoshi: ["Satoshi"],
+      },
+      backgroundImage: {
+        bgImage: "url('/paesaggio')",
       },
     },
   },

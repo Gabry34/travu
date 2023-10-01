@@ -1,83 +1,77 @@
 "use client";
 
-import Cities from "@/app/cities.json";
-import { useState } from "react";
+import ExampleCity from "./components/ExampleCity";
+import Link from "next/link";
+import CitiesDropdown from "./components/CitiesDropdown";
+import HomeNav from "./components/HomeNav";
 
 export default function Home() {
-  const [inputValue, setInputValue] = useState("");
-
-  const filteredCities = Cities.filter((c) => {
-    const nameMatch = c.name.toLowerCase().includes(inputValue.toLowerCase());
-    const stateNameMatch =
-      c.state_name &&
-      c.state_name.toLowerCase().includes(inputValue.toLowerCase());
-    const countryNameMatch = c.country_name
-      .toLowerCase()
-      .includes(inputValue.toLowerCase());
-
-    return nameMatch || stateNameMatch || countryNameMatch;
-  });
-
-  const handleContentClick1 = (city, country) => {
-    const newValue = `${city}, ${country}`;
-    setInputValue(newValue);
-  };
-
-  const resetInput = () => {
-    setInputValue("");
-  };
-
   return (
-    <div className="max-w-full bg-white">
-      <div className="w-full flex flex-col justify-center items-center">
-        <div className="absolute flex flex-col items-center">
-          <h1 className="font-Tenor text-9xl">travu</h1>
-          <p className="font-Work text-xl">
-            Your Passport to Shared Experiences
-          </p>
-        </div>
-        <img src="/paesaggi.jpg" className="min-h-[500px]" />
-      </div>
-      <div className="dropdown w-full flex justify-center relative bottom-6 items-center">
-        <div className="w-2/5">
-          <div className="flex bg-white border-[1px] border-neutral-500 rounded-full pr-2">
-            <input
-              type="text"
-              className="w-full rounded-full h-12 px-7 text-black text-2xl outline-none bg-white"
-              placeholder="Search a city or a country..."
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-            />
-            <img
-              src="/x.svg"
-              className="w-8 cursor-pointer"
-              onClick={resetInput}
-            />
-          </div>
-          <div className="dropdown-container justify-center bg-white">
-            <div className="scroll dropdown-menu dropdown-menu-bottom-center w-2/5 bg-white max-h-[350px] overflow-y-scroll">
-              {filteredCities.slice(0, 300).map((city, index) => {
-                return (
-                  <div
-                    key={index}
-                    onClick={() =>
-                      handleContentClick1(city.name, city.country_name)
-                    }
-                    className="py-2 px-2 cursor-pointer hover:bg-slate-200 rounded-md flex gap-3"
-                  >
-                    <img src="/pin.svg" className="w-8" />
-                    <div>
-                      <h1 className="text-black text-2xl">{city.name}</h1>
-                      <h1 className="text-black">{city.country_name}</h1>
-                    </div>
-                  </div>
-                );
-              })}
+    <>
+      <HomeNav />
+      <div className="max-w-full bg-customBlack">
+        <div className="w-full bg-[url('/paesaggio.jpg')] flex flex-col justify-center items-center">
+          <div className="bg-gradient-to-b from-transparent to-customBlack w-full min-h-[800px] bg-opacity-40 flex flex-col justify-between items-center">
+            <div className="pt-[250px]">
+              <h1 className="text-center font-satoshi font-normal text-6xl leading-[80px]">
+                Connecting Explorers<br></br>Through the Power of Shared
+                <br></br>
+                Travel Experiences.
+              </h1>
+            </div>
+            <div className="w-full pb-20 flex justify-between items-center px-20">
+              <p className="font-Poppins text-sm opacity-80">
+                Your passport to a global adventure begins here,<br></br>where
+                you can share your travel tales,<br></br>connect with fellow
+                adventurers,<br></br>and inspire a worldwide community of
+                wanderlust seekers.
+              </p>
+              <Link
+                className="h-10 flex gap-2 items-center border-[1px] border-white px-5 rounded-full"
+                href={{
+                  pathname: `/search/allCities`,
+                  query: {
+                    city: "",
+                    country: "",
+                  },
+                }}
+              >
+                <p className="m-0">Explore now</p>
+                <img src="/arrow-right.svg" alt="" className="w-7" />
+              </Link>
             </div>
           </div>
         </div>
+        <div className="relative bottom-6">
+          <CitiesDropdown />
+        </div>
+        <div className="">
+          <ExampleCity />
+        </div>
       </div>
-      <div className="h-[500px]"></div>
-    </div>
+    </>
   );
+}
+
+{
+  /* <div className="w-full h-full bg-blackflex flex-col gap-[55px] items-center font-Work px-16">
+          <div className="bg-white flex flex-col justify-center items-center p-5 pt-2 px-7">
+            <h1 className="font-Tenor text-9xl text-black">travu</h1>
+            <p className="font-Work text-xl text-black">
+              Your Passport to Shared Experiences
+            </p>
+          </div>
+          <Link
+            className="border-[1px] border-white px-2 py-1 text-2xl hover:bg-slate-700 hover:bg-opacity-40"
+            href={{
+              pathname: `/search/allCities`,
+              query: {
+                city: "",
+                country: "",
+              },
+            }}
+          >
+            Get started
+          </Link>
+        </div> */
 }

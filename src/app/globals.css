@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
+@import url("https://fonts.cdnfonts.com/css/mulish?styles=80408,80403,80406,80409,80399,80401,80397");
+@import url("https://fonts.cdnfonts.com/css/satoshi?styles=135009,135005,135007,135002,135000");
 
 @tailwind base;
 @tailwind components;
@@ -31,4 +35,9 @@ body {
 
 .scroll::-webkit-scrollbar {
   display: none;
+}
+
+.custom-select {
+  border: none;
+  outline: none;
 }
