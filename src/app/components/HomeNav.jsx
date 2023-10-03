@@ -1,6 +1,11 @@
-import React from "react";
+"use client"
 
-const HomeNav = () => {
+import React from "react";
+import { signOut } from "next-auth/react";
+import Link from "next/link";
+
+const HomeNav = ({ session }) => {
+  console.log(session.status);
   return (
     <div className="bg-transparent absolute w-full h-10 grid grid-cols-3 px-20 pt-5 items-center">
       <a
@@ -13,7 +18,17 @@ const HomeNav = () => {
         <a className="cursor-pointer">About Us</a>
         <a className="cursor-pointer">Features</a>
       </div>
-      <div></div>
+      <div>
+        {session.status === "authenticated" ? <div>ciao</div> : <p>o</p>}
+      </div>
+      <Link
+        href="/"
+        onClick={() => {
+          signOut();
+        }}
+      >
+        signout
+      </Link>
     </div>
   );
 };
