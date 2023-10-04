@@ -1,15 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 export default function loginPage() {
+  const { data: session, status } = useSession();
   const router = useRouter();
+  const [error, setError] = useState("");
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+
+  if (session?.user.name) {
+    router.push("/");
+  }
 
   const loginUser = async (e) => {
     e.preventDefault();
@@ -17,18 +24,27 @@ export default function loginPage() {
       ...data,
       redirect: false,
     });
-    router.push("/dashboard");
+    setError("");
+    setTimeout(() => {
+      if (session?.user.name) {
+        router.push("/dashboard");
+      } else {
+        setError("Email or Password not valid");
+      }
+    }, 3000);
   };
+
+  console.log(session);
   return (
-    <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+    <div className="h-screen bg-customBlack flex items-center justify-center">
+      <div className="max-w-[400px] flex flex-1 flex-col justify-center px-6 py-12 lg:px-8 rounded-lg shadow-lg shadow-black">
+        <div className="">
           <img
             className="mx-auto h-10 w-auto"
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
             Sign in to your account
           </h2>
         </div>
@@ -38,7 +54,7 @@ export default function loginPage() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6 text-white"
               >
                 Email address
               </label>
@@ -53,7 +69,7 @@ export default function loginPage() {
                   onChange={(e) => {
                     setData({ ...data, email: e.target.value });
                   }}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -62,18 +78,10 @@ export default function loginPage() {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block text-sm font-medium leading-6 text-white"
                 >
                   Password
                 </label>
-                <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
               </div>
               <div className="mt-2">
                 <input
@@ -86,10 +94,16 @@ export default function loginPage() {
                   onChange={(e) => {
                     setData({ ...data, password: e.target.value });
                   }}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
+
+            {error ? (
+              <div className="bg-red-500 w-fit py-1 px-3 rounded-md">
+                <p className="text-white">{error}</p>
+              </div>
+            ) : null}
 
             <div>
               <button
@@ -100,18 +114,8 @@ export default function loginPage() {
               </button>
             </div>
           </form>
-
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{" "}
-            <a
-              href="#"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
-              Start a 14 day free trial
-            </a>
-          </p>
         </div>
       </div>
-    </>
+    </div>
   );
 }

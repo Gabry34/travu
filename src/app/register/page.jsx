@@ -2,14 +2,20 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function RegisterPage() {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
   });
+
+  if (session?.user.name) {
+    router.push("/");
+  }
 
   const RegisterUser = async (e) => {
     e.preventDefault();
