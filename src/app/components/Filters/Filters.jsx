@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import months from "@/app/months.json";
-import years from "@/app/years.json";
+import months from "@/app/data/months.json";
+import years from "@/app/data/years.json";
 import Link from "next/link";
 
 const Filters = ({ city, country }) => {

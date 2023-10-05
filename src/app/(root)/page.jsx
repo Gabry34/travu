@@ -1,9 +1,9 @@
 "use client";
 
-import ExampleCity from "./components/ExampleCity";
+import ExampleCity from "../components/ui/ExampleCity";
 import Link from "next/link";
-import CitiesDropdown from "./components/CitiesDropdown";
-import HomeNav from "./components/HomeNav";
+import CitiesDropdown from "../components/Dropdowns/CitiesDropdown";
+import HomeNav from "../components/Navs/HomeNav";
 import { useSession } from "next-auth/react";
 
 export default function Home() {

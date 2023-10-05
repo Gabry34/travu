@@ -1,9 +1,8 @@
-import React from "react";
-import Cities from "@/app/cities.json";
-import { useState } from "react";
+import React, { useState } from "react";
+import Cities from "@/app/data/cities.json";
 import Link from "next/link";
 
-const CitiesDropdown = () => {
+const CitiesSearchbar = () => {
   const [inputValue, setInputValue] = useState("");
 
   const filteredCities = Cities.filter((c) => {
@@ -60,26 +59,25 @@ const CitiesDropdown = () => {
     const newValue = `${city}, ${country}`;
     setInputValue(newValue);
   };
-
-  const resetInput = () => {
-    setInputValue("");
-  };
-
   return (
-    <div className="dropdown w-full flex justify-center items-center">
-      <div className="w-2/5">
-        <div className="flex bg-white border-[1px] border-neutral-500 rounded-lg pr-3">
-          <input
-            type="search"
-            className="w-full rounded-full h-12 px-7 pl-3 text-black text-2xl outline-none bg-white"
-            placeholder="Search a city or a country..."
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-        </div>
-        <div className="dropdown-container bg-white w-full justify-start pr-10">
-          <div className="scroll dropdown-menu dropdown-menu-bottom-center w-2/5 bg-white max-h-[350px] overflow-y-scroll">
-            {filteredCities.slice(0, 300).map((city, index) => {
+    <div>
+      <div className="dropdown-container">
+        <div className="dropdown">
+          <label
+            className="btn btn-solid-primary my-2 px-0 w-[500px] bg-searchBarGray hover:bg-searchBarGray cursor-default pr-3"
+            tabIndex="0"
+          >
+            <input
+              type="text"
+              className="w-full h-full px-3 outline-none rounded-lg text-white text-lg font-light"
+              placeholder="Search a city or a country..."
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+            <img src="/search.svg" alt="" className="w-5" />
+          </label>
+          <div className="scroll dropdown-menu dropdown-menu-bottom-center w-full max-h-[350px] overflow-y-scroll pt-0 px-0">
+            {filteredCities.slice(0, 100).map((city, index) => {
               return (
                 <Link
                   key={index}
@@ -87,18 +85,17 @@ const CitiesDropdown = () => {
                     handleContentClick1(city.name, city.country_name)
                   }
                   href={{
-                    pathname: `/search/${city.name}_${city.country_name}`,
                     query: {
                       city: city.name,
                       country: city.country_name,
                     },
                   }}
-                  className="py-2 px-2 cursor-pointer hover:bg-slate-200 rounded-md flex gap-3"
+                  className="py-2 px-2 cursor-pointer hover:bg-zinc-700 rounded-md flex gap-3"
                 >
-                  <img src="/pin.svg" className="w-8" />
+                  <img src="/pin-black.svg" className="w-8" />
                   <div>
-                    <h1 className="text-black text-2xl">{city.name}</h1>
-                    <h1 className="text-black">{city.country_name}</h1>
+                    <h1 className="text-2xl">{city.name}</h1>
+                    <h1 className="opacity-80">{city.country_name}</h1>
                   </div>
                 </Link>
               );
@@ -110,4 +107,4 @@ const CitiesDropdown = () => {
   );
 };
 
-export default CitiesDropdown;
+export default CitiesSearchbar;

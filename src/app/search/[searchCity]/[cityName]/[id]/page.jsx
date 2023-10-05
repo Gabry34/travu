@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import travelJson from "@/app/travelExperiencies.json";
+import travelJson from "@/app/data/travelExperiencies.json";
 
 const Page = () => {
   const [lastSegment, setLastSegment] = useState();

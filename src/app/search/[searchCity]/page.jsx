@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import travelJson from "@/app/travelExperiencies.json";
-import Card from "@/app/components/Card";
-import CitiesSearchbar from "@/app/components/CitiesSearchbar";
-import Filters from "@/app/components/Filters";
+import travelJson from "@/app/data/travelExperiencies.json";
+import Card from "@/app/components/Cards/Card";
+import CitiesSearchbar from "@/app/components/Dropdowns/CitiesSearchbar";
+import Filters from "@/app/components/Filters/Filters";
 
 const Page = ({ searchParams }) => {
   const [city, setCity] = useState();

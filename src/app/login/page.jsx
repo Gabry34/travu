@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
 
-export default function loginPage() {
+export default function LoginPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [error, setError] = useState("");
@@ -13,35 +13,42 @@ export default function loginPage() {
     email: "",
     password: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  if (session?.user.name) {
-    router.push("/");
-  }
+  useEffect(() => {
+    if (session?.user.name) {
+      router.push("/");
+    }
+  }, [session, router]);
 
   const loginUser = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
     signIn("credentials", {
       ...data,
       redirect: false,
     });
+
     setError("");
+
     setTimeout(() => {
+      setIsSubmitting(false);
       if (session?.user.name) {
-        router.push("/dashboard");
+        router.push("/");
       } else {
         setError("Email or Password not valid");
       }
     }, 3000);
   };
-
   console.log(session);
   return (
     <div className="h-screen bg-customBlack flex items-center justify-center">
       <div className="max-w-[400px] flex flex-1 flex-col justify-center px-6 py-12 lg:px-8 rounded-lg shadow-lg shadow-black">
         <div className="">
           <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            className="mx-auto h-16 w-auto"
+            src="/logo.svg"
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
@@ -69,7 +76,8 @@ export default function loginPage() {
                   onChange={(e) => {
                     setData({ ...data, email: e.target.value });
                   }}
-                  className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  disabled={isSubmitting}
                 />
               </div>
             </div>
@@ -94,7 +102,8 @@ export default function loginPage() {
                   onChange={(e) => {
                     setData({ ...data, password: e.target.value });
                   }}
-                  className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  disabled={isSubmitting}
                 />
               </div>
             </div>
@@ -114,6 +123,15 @@ export default function loginPage() {
               </button>
             </div>
           </form>
+          <p className="mt-10 text-center text-sm text-gray-500">
+            You don't have an account?{" "}
+            <a
+              href="/register"
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            >
+              Signin
+            </a>
+          </p>
         </div>
       </div>
     </div>
