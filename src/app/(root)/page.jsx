@@ -12,7 +12,7 @@ export default function Home() {
     <>
       <HomeNav session={session} />
       <div className="max-w-full bg-customBlack">
-        <div className="w-full bg-[url('/paesaggio.jpg')] flex flex-col justify-center items-center">
+        <div className="w-full bg-[url('/paesaggio.jpg')] bg-cover flex flex-col justify-center items-center">
           <div className="bg-gradient-to-b from-transparent to-customBlack w-full min-h-[800px] bg-opacity-40 flex flex-col justify-between items-center">
             <div className="pt-[250px]">
               <h1 className="text-center font-satoshi font-normal text-6xl leading-[80px]">

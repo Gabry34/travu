@@ -38,13 +38,18 @@ const HomeNav = () => {
                   <a className="dropdown-item text-sm" href="/dashboard">
                     Dashboard
                   </a>
-                  <a
+                  <Link
                     tabIndex="-1"
                     className="dropdown-item text-sm"
-                    href="/create"
+                    href={{
+                      pathname: `/create`,
+                      query: {
+                        step: "one",
+                      },
+                    }}
                   >
                     Create a Post
-                  </a>
+                  </Link>
                   <Link
                     tabIndex="-1"
                     className="dropdown-item text-sm text-red-500"
