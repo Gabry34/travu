@@ -1,12 +1,11 @@
-"use client";
-
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-export default function daysInput({ days, onDataChange, setStep }) {
+export default function daysInput({ days, onDataChange }) {
   const [activityInputs, setActivityInputs] = useState(
     Array.from({ length: Number(days) }, () => "")
   );
+  const [error, setError] = useState("");
 
   const handleActivityInputChange = (index, value) => {
     const updatedActivityInputs = [...activityInputs];
@@ -19,11 +18,11 @@ export default function daysInput({ days, onDataChange, setStep }) {
   }, [activityInputs]);
 
   const settingStepThree = () => {
-    setStep("three");
-  };
-
-  const settingStepOne = () => {
-    setStep("one");
+    if (activityInputs.every((input) => input.trim() !== "")) {
+      localStorage.setItem("daysDescriptions", JSON.stringify(activityInputs));
+    } else {
+      setError("fill all the fields");
+    }
   };
   return (
     <div className="w-full px-20 py-16 pb-7 mt-10 flex flex-col items-center gap-10 border-[1px] border-white rounded-xl shadow-lg shadow-black">
@@ -50,21 +49,30 @@ export default function daysInput({ days, onDataChange, setStep }) {
               },
             }}
             className="border-[1px] border-white px-3 py-1 rounded-md"
-            onClick={settingStepOne}
           >
             Previus
           </Link>
-          <Link
-            href={{
-              query: {
-                step: "three",
-              },
-            }}
-            className="border-[1px] border-white px-3 py-1 rounded-md"
-            onClick={settingStepOne}
-          >
-            Next
-          </Link>
+          {error ? <p className="text-red-500 text-xl">{error}</p> : <p></p>}
+          {!activityInputs.every((input) => input.trim() !== "") ? (
+            <button
+              className="border-[1px] border-white px-3 py-1 rounded-md"
+              onClick={settingStepThree}
+            >
+              Next
+            </button>
+          ) : (
+            <Link
+              className="border-[1px] border-white px-3 py-1 rounded-md"
+              href={{
+                query: {
+                  step: "three",
+                },
+              }}
+              onClick={settingStepThree}
+            >
+              Next
+            </Link>
+          )}
         </div>
       </div>
     </div>

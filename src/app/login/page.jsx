@@ -14,6 +14,7 @@ export default function LoginPage() {
     password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (session?.user.name) {
@@ -24,6 +25,7 @@ export default function LoginPage() {
   const loginUser = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setIsLoading(true);
 
     signIn("credentials", {
       ...data,
@@ -34,6 +36,7 @@ export default function LoginPage() {
 
     setTimeout(() => {
       setIsSubmitting(false);
+      setIsLoading(false);
       if (session?.user.name) {
         router.push("/");
       } else {
@@ -44,6 +47,11 @@ export default function LoginPage() {
   console.log(session);
   return (
     <div className="h-screen bg-customBlack flex items-center justify-center">
+      {isLoading ? (
+        <div className="w-screen h-screen absolute bg-customBlack bg-opacity-70 flex justify-center items-center">
+          <div className="spinner-simple w-[100px] h-[100px]"></div>
+        </div>
+      ) : null}
       <div className="max-w-[400px] flex flex-1 flex-col justify-center px-6 py-12 lg:px-8 rounded-lg shadow-lg shadow-black">
         <div className="">
           <img

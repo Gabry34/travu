@@ -35,6 +35,7 @@ const Filters = ({ city, country }) => {
                 type="number"
                 placeholder="Min"
                 onChange={(event) => setMinPrice(event.target.value)}
+                value={minPrice}
               />
             </div>
             <div className="flex gap-[2px] w-2/5 min-w-[130px]">
@@ -44,6 +45,7 @@ const Filters = ({ city, country }) => {
                 type="number"
                 placeholder="Max"
                 onChange={(event) => setMaxPrice(event.target.value)}
+                value={maxPrice}
               />
             </div>
           </div>
@@ -105,6 +107,7 @@ const Filters = ({ city, country }) => {
               type="number"
               className="w-[60px] pl-1 outline-none"
               onChange={(event) => setDuration(event.target.value)}
+              value={duration}
             />
             <h1>Days</h1>
           </div>

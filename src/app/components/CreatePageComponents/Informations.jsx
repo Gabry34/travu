@@ -10,6 +10,8 @@ export default function Informations({
   passState,
   passTravelPrice,
   passShortDescription,
+  passStartDate,
+  passEndDate,
 }) {
   const [error, setError] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -31,6 +33,16 @@ export default function Informations({
     setDays(daysDifference);
   }, [startDate, endDate]);
 
+  const saveData = () => {
+    localStorage.setItem("title", title);
+    localStorage.setItem("city", city);
+    localStorage.setItem("state", state);
+    localStorage.setItem("startDate", startDate);
+    localStorage.setItem("endDate", endDate);
+    localStorage.setItem("travelPrice", travelPrice);
+    localStorage.setItem("shortDescription", shortDescription);
+  };
+
   useEffect(() => {
     passDays(days);
   }, [days]);
@@ -46,6 +58,14 @@ export default function Informations({
   useEffect(() => {
     passTitle(title);
   }, [title]);
+
+  useEffect(() => {
+    passStartDate(startDate);
+  }, [startDate]);
+
+  useEffect(() => {
+    passEndDate(endDate);
+  }, [endDate]);
 
   const handleCity = (data) => {
     passCity(data);
@@ -68,6 +88,7 @@ export default function Informations({
           onChange={(e) => {
             setTitle(e.target.value);
           }}
+          maxLength={22}
         />
       </div>
       {/* CITY AND COUNTRY */}
@@ -131,14 +152,14 @@ export default function Informations({
       </div>
       {/* SHORT DESCRIPTION */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-2xl">Short description (max: 300)</h1>
+        <h1 className="text-2xl">Short description (max: 1500)</h1>
         <textarea
           name=""
           id=""
           cols="100"
           rows="5"
           className="px-1 py-1 text-lg rounded-sm"
-          maxLength={300}
+          maxLength={1500}
           onChange={(e) => {
             setShortDescription(e.target.value);
           }}
@@ -154,6 +175,7 @@ export default function Informations({
               },
             }}
             className="border-[1px] border-white px-3 py-1 rounded-md"
+            onClick={saveData}
           >
             Next
           </Link>

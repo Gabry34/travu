@@ -1,50 +1,99 @@
 import React from "react";
 
-const Card = ({ city }) => {
-  const truncatedDescription = city.description
+const Card = ({ travel }) => {
+  const truncatedDescription = travel.description
     .split(" ")
-    .slice(0, 110)
+    .slice(0, 25)
     .join(" ");
 
   const goToTravelInformation = (id) => {
-    window.location.href = `/search/${city.city}_${city.country}/${city.title}/${id}`;
+    window.location.href = `/search/${travel.city}_${travel.state}/${travel.title}/${id}`;
   };
 
   return (
     <div
-      className="rounded-lg flex gap-3 cursor-pointer p-3"
-      onClick={() => goToTravelInformation(city.id)}
+      className="rounded-xl flex flex-col gap-1 p-2 select-none"
+      draggable={false}
     >
-      {!city.images[0] ? (
-        <div className="min-w-[300px] h-[170px] rounded-lg flex justify-center items-center bg-gray-600 bg-opacity-10">
+      {!travel.images[0] ? (
+        <div className="min-w-[300px] h-[170px] rounded-xl flex justify-center items-center bg-gray-600 bg-opacity-10">
           <img src="/noimage.svg" className="w-24" />
         </div>
       ) : (
         <div
-          className="min-w-[300px] h-[200px] rounded-lg"
+          className="min-w-[300px] h-[200px] rounded-sm rounded-t-lg"
           style={{
-            backgroundImage: `url(${city.images[0]})`,
+            backgroundImage: `url(${travel.images[0].base64URL})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         ></div>
       )}
-      <div className="flex flex-col justify-between pr-2 w-full">
-        <div className="flex items-baseline gap-5">
-          <h1 className="font-medium text-xl">{city.title}</h1>
-          <h1 className="text-sm">
-            {city.city}, {city.country}
+      <div
+        className="flex gap-1 flex-col justify-around px-1 w-full select-none"
+        draggable={false}
+      >
+        <div className="flex flex-col gap-2">
+          <h1
+            className="text-2xl font-Poppins first-letter:uppercase pt-1 overflow-hidden break-words select-none"
+            draggable={false}
+          >
+            {travel.title}
           </h1>
+          <div className="min-h-[95px] max-h-[95px] overflow-hidden">
+            <p
+              className="max-w-full overflow-hidden break-words h-full select-none"
+              draggable={false}
+            >
+              {truncatedDescription}
+              {travel.description.length > 25 ? <span>...</span> : null}
+            </p>
+          </div>
+          <div className="mt-3 flex items-center gap-2">
+            <img
+              src="/time.svg"
+              alt=""
+              className="w-6 select-none"
+              draggable={false}
+            />
+            <p className="select-none" draggable={false}>
+              {travel.startDate} - {travel.endDate}
+            </p>
+          </div>
+          <div className="flex items-center gap-2 mt-1">
+            <img
+              src="/pin-red.svg"
+              alt=""
+              className="w-6 select-none"
+              draggable={false}
+            />
+            <p className="select-none" draggable={false}>
+              {travel.city}, {travel.state}
+            </p>
+          </div>
+          <div className="flex items-center gap-2 mt-1">
+            <img
+              src="/money.svg"
+              alt=""
+              className="w-6 select-none"
+              draggable={false}
+            />
+            <p className="select-none" draggable={false}>
+              ${travel.travelPrice}
+            </p>
+          </div>
         </div>
-        <div className="pb-2">
-          <p className="text-sm font-medium">{truncatedDescription}...</p>
-        </div>
-        <div className="flex items-center justify-between">
-          <h1 className="text-base text-gray-600">
-            {city.startDate} - {city.endDate}
-          </h1>
-          <h1 className="text-base">${city.travelPrice}</h1>
-        </div>
+        <button
+          className="w-full py-1 px-2 bg-blue-900 rounded-md mt-3"
+          onClick={() => goToTravelInformation(travel._id)}
+        >
+          View
+        </button>
+        {location.pathname === "/dashboard" && (
+          <button className="w-full py-1 px-2 bg-red-500 rounded-md mt-1">
+            Delete
+          </button>
+        )}
       </div>
     </div>
   );

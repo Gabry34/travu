@@ -5,15 +5,20 @@ import Nav from "../components/Navs/Nav";
 import Stepper from "../components/Stepper/page";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Daysinputs from "../components/Create/DaysInput";
-import Informations from "../components/Create/Informations";
+import Daysinputs from "../components/CreatePageComponents/DaysInput";
+import Informations from "../components/CreatePageComponents/Informations";
+import Images from "../components/CreatePageComponents/Images";
+import Posted from "../components/CreatePageComponents/Posted";
 
 export default function Page({ searchParams }) {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [step, setStep] = useState("");
   const [daysDescriptions, setDaysDescriptions] = useState([]);
+  const [images, setImages] = useState([]);
   const [days, setDays] = useState();
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [travelPrice, setTravelPrice] = useState();
@@ -22,6 +27,10 @@ export default function Page({ searchParams }) {
 
   const handleDataFromChild = (data) => {
     setDaysDescriptions(data);
+  };
+
+  const handleImages = (data) => {
+    setImages(data);
   };
 
   const daysFromChild = (data) => {
@@ -48,9 +57,17 @@ export default function Page({ searchParams }) {
     setTitle(data);
   };
 
+  const handleStartDate = (data) => {
+    setStartDate(data);
+  };
+
+  const handleEndDate = (data) => {
+    setEndDate(data);
+  };
+
   useEffect(() => {
     setStep(searchParams.step);
-  }, [searchParams]);
+  }, [searchParams.step]);
 
   if (status === "loading") {
     return (
@@ -59,6 +76,7 @@ export default function Page({ searchParams }) {
       </div>
     );
   }
+
   if (!session) {
     router.push("/");
     return null;
@@ -78,10 +96,26 @@ export default function Page({ searchParams }) {
             passTravelPrice={handleTravelPrice}
             passShortDescription={handleShortDescription}
             passTitle={handleTitle}
+            passStartDate={handleStartDate}
+            passEndDate={handleEndDate}
           />
         ) : searchParams.step === "two" ? (
           <Daysinputs days={days} onDataChange={handleDataFromChild} />
-        ) : null}
+        ) : searchParams.step === "three" ? (
+          <Images passImages={handleImages} />
+        ) : (
+          <Posted
+            city={city}
+            country={state}
+            startDate={startDate}
+            endDate={endDate}
+            images={images}
+            title={title}
+            description={shortDescription}
+            travelPrice={travelPrice}
+            daysDescriptions={daysDescriptions}
+          />
+        )}
       </div>
     </>
   );

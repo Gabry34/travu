@@ -44,3 +44,16 @@ model User {
   accounts      Account[]
   sessions      Session[]
 }
+
+model Travel {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  title         String?   @unique
+  city          String?
+  state         String?
+  startDate     String?
+  endDate       String?
+  images        image[]
+  description   String?
+  travelPrice   String?
+  daysDescriptions  days[]
+}

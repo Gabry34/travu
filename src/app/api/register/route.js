@@ -24,7 +24,6 @@ export async function POST(request) {
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
-
   const image = "/user-image.svg";
 
   const user = await prisma.user.create({

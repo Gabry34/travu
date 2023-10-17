@@ -7,7 +7,15 @@ import HomeNav from "../components/Navs/HomeNav";
 import { useSession } from "next-auth/react";
 
 export default function Home() {
-  const session = useSession();
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return (
+      <div className="w-screen h-screen bg-customBlack flex justify-center items-center">
+        <div className="spinner-simple w-[100px] h-[100px]"></div>
+      </div>
+    );
+  }
   return (
     <>
       <HomeNav session={session} />

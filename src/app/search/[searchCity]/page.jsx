@@ -13,6 +13,30 @@ const Page = ({ searchParams }) => {
   const [selectedMonth, setSelectedMonth] = useState();
   const [selectedYear, setSelectedYear] = useState();
   const [duration, setDuration] = useState();
+  const [travels, setTravels] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getTravels = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch("http://localhost:3000/api/travels", {
+          cache: "no-store",
+        });
+        if (!res.ok) {
+          throw new Error("Failed to fetch travels");
+        }
+        const data = await res.json();
+        setTravels(data.travels);
+        setLoading(false);
+      } catch (error) {
+        console.log("Error loading travels: ", error);
+        setLoading(false);
+      }
+    };
+
+    getTravels();
+  }, []);
 
   useEffect(() => {
     setCity(searchParams.city);
@@ -24,9 +48,9 @@ const Page = ({ searchParams }) => {
     setDuration(searchParams.duration);
   }, [searchParams]);
 
-  const filteredTravels = travelJson.filter((t) => {
+  const filteredTravels = travels.filter((t) => {
     if (city && country) {
-      return t.city === city && t.country === country;
+      return t.city === city && t.state === country;
     } else if (t.city === t.city) {
       return true;
     }
@@ -38,7 +62,7 @@ const Page = ({ searchParams }) => {
     } else if (minPrice && !maxPrice) {
       return minPrice <= t.travelPrice;
     } else if (!minPrice && maxPrice) {
-      return maxPrice <= t.travelPrice;
+      return maxPrice >= t.travelPrice;
     } else if (!minPrice && !maxPrice) {
       return true;
     }
@@ -76,8 +100,8 @@ const Page = ({ searchParams }) => {
       const end = t.endDate;
 
       function giorniTraDate(data1, data2) {
-        const data1Arr = data1.split("/");
-        const data2Arr = data2.split("/");
+        const data1Arr = data1.split("-");
+        const data2Arr = data2.split("-");
         const data1Obj = new Date(data1Arr[0], data1Arr[1] - 1, data1Arr[2]);
         const data2Obj = new Date(data2Arr[0], data2Arr[1] - 1, data2Arr[2]);
         const differenzaMs = Math.abs(data2Obj - data1Obj);
@@ -92,7 +116,7 @@ const Page = ({ searchParams }) => {
   });
 
   return (
-    <div className="min-h-screen max-w-screen bg-customBlack flex flex-col gap-5">
+    <div className="max-w-screen bg-customBlack flex flex-col gap-5">
       <div className="grid grid-cols-3 items-center px-20 pt-10">
         <CitiesSearchbar />
         <div className="flex justify-center items-center ">
@@ -107,16 +131,22 @@ const Page = ({ searchParams }) => {
         <Filters city={city} country={country} />
       </div>
       <div className="flex w-full px-20 justify-center gap-5">
-        <div className="w-full flex flex-col items-center gap-3 bg-customBlack">
-          {filteredDuration.map((t) => (
-            <div
-              className="w-full border-[1px] border-neutral-500 rounded-lg hover:bg-gray-500 hover:bg-opacity-10"
-              key={t.id}
-            >
-              <Card city={t} />
-            </div>
-          ))}
-        </div>
+        {loading ? (
+          <div className="h-[700px] flex items-center justify-center">
+            <progress className="progress w-[500px] h-3"></progress>
+          </div>
+        ) : (
+          <div className="w-full flex flex-wrap pt-10 gap-5 bg-customBlack">
+            {filteredDuration.map((t) => (
+              <div
+                className="w-[350px] rounded-xl bg-white bg-opacity-5 hover:bg-gray-500 hover:bg-opacity-10"
+                key={t._id}
+              >
+                <Card travel={t} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -135,3 +165,20 @@ export default Page;
         />
       </div> */
 }
+
+// const getTravels = async () => {
+//   try {
+//     const res = await fetch("http://localhost:3000/api/travels", {
+//       cache: "no-store",
+//     });
+//     if (!res.ok) {
+//       throw new Error("Failed to fetch travels");
+//     }
+
+//     return res.json();
+//   } catch (error) {
+//     console.log("Error loading travels: ", error);
+//   }
+// };
+
+// const { travels } = await getTravels();
