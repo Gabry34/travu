@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import travelJson from "@/app/data/travelExperiencies.json";
 import Card from "@/app/components/Cards/Card";
 import CitiesSearchbar from "@/app/components/Dropdowns/CitiesSearchbar";
 import Filters from "@/app/components/Filters/Filters";
@@ -139,7 +138,7 @@ const Page = ({ searchParams }) => {
           <div className="w-full flex flex-wrap pt-10 gap-5 bg-customBlack">
             {filteredDuration.map((t) => (
               <div
-                className="w-[350px] rounded-xl bg-white bg-opacity-5 hover:bg-gray-500 hover:bg-opacity-10"
+                className="w-[325px] rounded-xl bg-white bg-opacity-5 hover:bg-gray-500 hover:bg-opacity-10"
                 key={t._id}
               >
                 <Card travel={t} />
@@ -153,32 +152,3 @@ const Page = ({ searchParams }) => {
 };
 
 export default Page;
-
-{
-  /* <div className="w-full px-20 pt-5">
-        <img
-          src="/arrow-left.svg"
-          className="w-10 cursor-pointer"
-          onClick={() => {
-            history.back(-1);
-          }}
-        />
-      </div> */
-}
-
-// const getTravels = async () => {
-//   try {
-//     const res = await fetch("http://localhost:3000/api/travels", {
-//       cache: "no-store",
-//     });
-//     if (!res.ok) {
-//       throw new Error("Failed to fetch travels");
-//     }
-
-//     return res.json();
-//   } catch (error) {
-//     console.log("Error loading travels: ", error);
-//   }
-// };
-
-// const { travels } = await getTravels();

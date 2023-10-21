@@ -84,7 +84,6 @@ export default function Page({ searchParams }) {
 
   return (
     <>
-      <script src="../path/to/flowbite/dist/datepicker.js"></script>
       <Nav />
       <div className="w-full bg-customBlack flex flex-col px-20 py-10">
         <Stepper step={step} />

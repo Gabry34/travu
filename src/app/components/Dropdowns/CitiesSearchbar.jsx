@@ -85,6 +85,7 @@ const CitiesSearchbar = () => {
                     handleContentClick1(city.name, city.country_name)
                   }
                   href={{
+                    pathname: `/search/${city.name}_${city.country_name}`,
                     query: {
                       city: city.name,
                       country: city.country_name,

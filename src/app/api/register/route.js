@@ -1,39 +1,34 @@
-import bcrypt from "bcrypt";
-import { PrismaClient } from "@prisma/client";
+import connectMongoDB from "@/app/lib/mongodb";
+import User from "@/app/models/user";
 import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
-
 export async function POST(request) {
-  const body = await request.json();
-  const { name, email, password } = body.data;
-  console.log(body.data);
+  const { name, email, hashedPassword, image, biography } =
+    await request.json();
+  await connectMongoDB();
+  const user = await User.findOne({ email });
 
-  if (!name || !email || !password) {
-    return new NextResponse("Missing name, email or password", { status: 400 });
-  }
-
-  const exist = await prisma.user.findUnique({
-    where: {
-      email: email,
-    },
-  });
-
-  if (exist) {
-    return new NextResponse("User already exists", { status: 400 });
-  }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const image = "/user-image.svg";
-
-  const user = await prisma.user.create({
-    data: {
+  if (!user) {
+    await User.create({
       name,
       email,
       hashedPassword,
       image,
-    },
-  });
+      biography,
+    });
+    return NextResponse.json({ message: "User Created" }, { status: 201 });
+  }
+}
 
-  return NextResponse.json(user);
+export async function GET() {
+  await connectMongoDB();
+  const users = await User.find();
+  return NextResponse.json({ users });
+}
+
+export async function DELETE(request) {
+  const id = request.nextUrl.searchParams.get("id");
+  await connectMongoDB();
+  await User.findByIdAndDelete(id);
+  return NextResponse.json({ message: "User deleted" }, { status: 200 });
 }

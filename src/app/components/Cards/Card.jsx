@@ -1,6 +1,7 @@
 import React from "react";
+import DeleteButton from "../Buttons/deleteButton";
 
-const Card = ({ travel }) => {
+const Card = ({ travel, isDashboard }) => {
   const truncatedDescription = travel.description
     .split(" ")
     .slice(0, 25)
@@ -89,11 +90,7 @@ const Card = ({ travel }) => {
         >
           View
         </button>
-        {location.pathname === "/dashboard" && (
-          <button className="w-full py-1 px-2 bg-red-500 rounded-md mt-1">
-            Delete
-          </button>
-        )}
+        {isDashboard ? <DeleteButton id={travel._id} /> : null}
       </div>
     </div>
   );

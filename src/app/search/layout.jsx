@@ -1,7 +1,7 @@
 import "../globals.css";
 import { Inter } from "next/font/google";
 import Nav from "../components/Navs/Nav";
-import { useRouter } from "next/navigation";
+import Provider from "../../../context/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,10 +13,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`bg-white ${inter.className}`}>
-        <Nav />
-        {children}
-      </body>
+      <Provider>
+        <body className={`bg-white ${inter.className}`}>
+          <Nav />
+          {children}
+        </body>
+      </Provider>
     </html>
   );
 }

@@ -5,16 +5,17 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 const HomeNav = () => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const image = session?.user.image;
   const router = useRouter();
   return (
     <div className="bg-transparent absolute w-full h-10 grid grid-cols-3 px-20 pt-5 items-center">
       <a
-        className="font-Tenor text-3xl flex items-center pl-4 font-light"
-        href="/"
+        className="font-Tenor text-3xl flex items-center pl-4 font-light select-none"
+        draggable={false}
       >
         travu
       </a>
@@ -32,9 +33,9 @@ const HomeNav = () => {
             <div>
               <div className="dropdown h-9">
                 <label className="" tabIndex="0">
-                  <img src="/hamburger.svg" className="w-10" />
+                  <img src={"/hamburger.svg"} className="w-10 cursor-pointer" />
                 </label>
-                <div className="dropdown-menu bg-customBlack w-[150px]">
+                <div className="dropdown-menu bg-customBlack w-[150px] mt-1">
                   <a className="dropdown-item text-sm" href="/dashboard">
                     Dashboard
                   </a>
@@ -90,14 +91,3 @@ const HomeNav = () => {
 };
 
 export default HomeNav;
-
-{
-  /* <Link
-              href="/"
-              onClick={() => {
-                signOut();
-              }}
-            >
-              signout
-            </Link> */
-}

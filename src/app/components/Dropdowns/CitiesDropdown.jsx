@@ -68,17 +68,17 @@ const CitiesDropdown = () => {
   return (
     <div className="dropdown w-full flex justify-center items-center">
       <div className="w-2/5">
-        <div className="flex bg-customBlack border-[1px] border-neutral-500 rounded-lg pr-3">
+        <div className="flex bg-transparent border-[1px] border-neutral-500 rounded-lg pr-3">
           <input
             type="text"
-            className="w-full rounded-full h-12 px-7 pl-3 text-white text-2xl outline-none bg-customBlack"
+            className="w-full rounded-full h-12 px-7 pl-3 text-white text-2xl outline-none bg-transparent"
             placeholder="Search a city or a country..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />
         </div>
-        <div className="dropdown-container bg-white w-full justify-start pr-10">
-          <div className="scroll dropdown-menu dropdown-menu-bottom-center w-2/5 bg-white max-h-[350px] overflow-y-scroll">
+        <div className="dropdown-container bg-customBlack w-full justify-start pr-10 mt-1">
+          <div className="scroll dropdown-menu dropdown-menu-bottom-center w-2/5 bg-customBlack bg-opacity-90 max-h-[350px] overflow-y-scroll border-[1px] border-white">
             {filteredCities.slice(0, 300).map((city, index) => {
               return (
                 <Link
@@ -93,12 +93,12 @@ const CitiesDropdown = () => {
                       country: city.country_name,
                     },
                   }}
-                  className="py-2 px-2 cursor-pointer hover:bg-slate-200 rounded-md flex gap-3"
+                  className="py-2 px-2 cursor-pointer hover:bg-zinc-700 rounded-md flex gap-3"
                 >
-                  <img src="/pin.svg" className="w-8" />
+                  <img src="/pin-black.svg" className="w-8" />
                   <div>
-                    <h1 className="text-black text-2xl">{city.name}</h1>
-                    <h1 className="text-black">{city.country_name}</h1>
+                    <h1 className="text-2xl">{city.name}</h1>
+                    <h1 className="opacity-80">{city.country_name}</h1>
                   </div>
                 </Link>
               );

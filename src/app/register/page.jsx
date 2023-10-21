@@ -1,36 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import bcrypt from "bcryptjs-react";
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { data: session, status } = useSession();
-  const [data, setData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    image: "/user-image.svg",
-  });
+  const { data: session } = useSession();
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   if (session?.user.name) {
     router.push("/");
   }
 
-  const RegisterUser = async (e) => {
+  const createUser = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ data }),
-    });
-    console.log(response);
-    const userInfo = await response.json();
-    console.log(userInfo);
-    router.push("/login");
+    try {
+      const hashed = await bcrypt.hash(password, 10);
+      const res = await fetch("http://localhost:3000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          hashedPassword: hashed,
+          image: "/user-image.webp",
+          biography: "",
+        }),
+      });
+      if (res.ok) {
+        router.push("/login");
+      } else {
+        setError("Email already in use");
+        throw new Error("Failed to create a user");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -48,7 +60,7 @@ export default function RegisterPage() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={RegisterUser}>
+          <form className="space-y-6" onSubmit={createUser}>
             <div>
               <label
                 htmlFor="email"
@@ -63,11 +75,11 @@ export default function RegisterPage() {
                   type="text"
                   autoComplete="email"
                   required
-                  value={data.name}
+                  value={name}
                   onChange={(e) => {
-                    setData({ ...data, name: e.target.value });
+                    setName(e.target.value);
                   }}
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -85,11 +97,11 @@ export default function RegisterPage() {
                   type="email"
                   autoComplete="email"
                   required
-                  value={data.email}
+                  value={email}
                   onChange={(e) => {
-                    setData({ ...data, email: e.target.value });
+                    setEmail(e.target.value);
                   }}
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -107,17 +119,23 @@ export default function RegisterPage() {
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type="text"
                   autoComplete="current-password"
                   required
-                  value={data.password}
+                  value={password}
                   onChange={(e) => {
-                    setData({ ...data, password: e.target.value });
+                    setPassword(e.target.value);
                   }}
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
+
+            {error ? (
+              <div className="bg-red-500 w-fit py-1 px-3 rounded-md">
+                <p className="text-white">{error}</p>
+              </div>
+            ) : null}
 
             <div>
               <button

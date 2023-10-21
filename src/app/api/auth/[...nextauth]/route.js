@@ -1,13 +1,15 @@
-import NextAuth from "next-auth/next";
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcrypt";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcryptjs-react";
+import mongoose from "mongoose";
+import User from "@/app/models/user";
 
-const prisma = new PrismaClient();
+mongoose.connect(process.env.DATABASE_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-export const authOptions = {
-  adapter: PrismaAdapter(prisma),
+const authOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -17,25 +19,20 @@ export const authOptions = {
         email: { label: "Email", type: "email" },
       },
       async authorize(credentials) {
-        // check to see if email and password is valid
-        if (!credentials.email || !credentials.password) {
+        const { email, password } = credentials;
+
+        if (!email || !password) {
           return null;
         }
 
-        // check to see if user exists
-        const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        });
+        const user = await User.findOne({ email });
 
         if (!user) {
           return null;
         }
 
-        //check to see if the password match
         const passwordMatch = await bcrypt.compare(
-          credentials.password,
+          password,
           user.hashedPassword
         );
 
@@ -43,10 +40,10 @@ export const authOptions = {
           return null;
         }
 
-        //return user object if everything is valid
         return user;
       },
     }),
+    // Add other providers if needed
   ],
   session: {
     strategy: "jwt",

@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
 
 export default function LoginPage() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const [error, setError] = useState("");
   const [data, setData] = useState({
@@ -15,6 +15,7 @@ export default function LoginPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
 
   useEffect(() => {
     if (session?.user.name) {
@@ -45,6 +46,11 @@ export default function LoginPage() {
     }, 3000);
   };
   console.log(session);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="h-screen bg-customBlack flex items-center justify-center">
       {isLoading ? (
@@ -84,7 +90,7 @@ export default function LoginPage() {
                   onChange={(e) => {
                     setData({ ...data, email: e.target.value });
                   }}
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block outline-none w-full rounded-md border-0 py-1.5 px-2 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                   disabled={isSubmitting}
                 />
               </div>
@@ -99,20 +105,34 @@ export default function LoginPage() {
                   Password
                 </label>
               </div>
-              <div className="mt-2">
+              <div className="flex gap-1 items-center bg-[#3B3B3B] rounded-md border-[1px] border-white">
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPassword ? "password" : "text"}
                   autoComplete="current-password"
                   required
                   value={data.password}
                   onChange={(e) => {
                     setData({ ...data, password: e.target.value });
                   }}
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full py-1.5 px-2 text-white rounded-md shadow-sm outline-none placeholder:text-gray-400 sm:text-sm sm:leading-6"
                   disabled={isSubmitting}
                 />
+
+                {showPassword ? (
+                  <img
+                    className="h-7 mr-2"
+                    src="/eyeNot.svg"
+                    onClick={togglePasswordVisibility}
+                  />
+                ) : (
+                  <img
+                    className="h-8 mr-2"
+                    src="/eyeShow.svg"
+                    onClick={togglePasswordVisibility}
+                  />
+                )}
               </div>
             </div>
 
