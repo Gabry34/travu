@@ -43,7 +43,7 @@ export default function DashboardPage() {
 
   if (status === "loading") {
     return (
-      <div className="w-screen h-screen bg-customBlack flex justify-center items-center">
+      <div className="w-full h-screen bg-customBlack flex justify-center items-center">
         <div className="spinner-simple w-[100px] h-[100px]"></div>
       </div>
     );
@@ -55,7 +55,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="w-full min-h-screen bg-customBlack flex flex-col gap-10">
+    <div className="w-full bg-customBlack flex flex-col gap-10">
       <div className="px-20 pt-5 flex gap-10 justify-start w-full">
         <div className="flex gap-10 justify-start w-full bg-white bg-opacity-5 px-10 py-8 rounded-3xl">
           <div
@@ -70,7 +70,7 @@ export default function DashboardPage() {
             <div>
               <h1 className="text-2xl">{session?.user.name}</h1>
               <h1 className="text-md opacity-40">{session?.user.email}</h1>
-              <h1>{session?.user.biography}</h1>
+              <h1>{session?.user.sub}</h1>
             </div>
             <EditAccount />
           </div>

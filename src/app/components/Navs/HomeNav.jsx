@@ -5,7 +5,6 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 
 const HomeNav = () => {
   const { data: session } = useSession();
@@ -73,7 +72,7 @@ const HomeNav = () => {
               }}
               className=" border-[1px] border-white px-3 py-1 rounded-md"
             >
-              Login
+              Log in
             </button>
             <button
               onClick={() => {
@@ -81,7 +80,7 @@ const HomeNav = () => {
               }}
               className=" border-[1px] border-white px-3 py-1 rounded-md"
             >
-              Signin
+              Sign in
             </button>
           </div>
         )}

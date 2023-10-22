@@ -45,6 +45,7 @@ const authOptions = {
     }),
     // Add other providers if needed
   ],
+  callbacks: {},
   session: {
     strategy: "jwt",
     maxAge: 24 * 60 * 60, // 24 hours

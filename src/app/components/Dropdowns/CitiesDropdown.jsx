@@ -78,7 +78,7 @@ const CitiesDropdown = () => {
           />
         </div>
         <div className="dropdown-container bg-customBlack w-full justify-start pr-10 mt-1">
-          <div className="scroll dropdown-menu dropdown-menu-bottom-center w-2/5 bg-customBlack bg-opacity-90 max-h-[350px] overflow-y-scroll border-[1px] border-white">
+          <div className="scroll dropdown-menu dropdown-menu-bottom-center w-2/5 bg-customBlack bg-opacity-[95%] max-h-[350px] overflow-y-scroll border-[1px] border-white">
             {filteredCities.slice(0, 300).map((city, index) => {
               return (
                 <Link

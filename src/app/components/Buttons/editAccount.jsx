@@ -1,6 +1,9 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import PasswordInput from "../Inputs/passwordInput";
+import EditUser from "./editUser";
 
 export default function editAccount() {
   const { data: session, status } = useSession();
@@ -8,22 +11,33 @@ export default function editAccount() {
   const [name, setName] = useState(session?.user.name);
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
-  const [user, setUser] = useState([]);
+  const [biography, setBiography] = useState("");
+  const [image, setImage] = useState("");
+  // current data
+  const [userId, setUserId] = useState("");
+  const [currentName, setCurrentName] = useState("");
+  const [currentHashedPassword, setCurrentHashedPassword] = useState("");
+  const [currentImage, setCurrentImage] = useState("");
+  const [currentSub, setCurrentSub] = useState("");
 
+  // convert file
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setSelectedImage(imageUrl);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setSelectedImage(e.target.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
-  const profileImage = selectedImage || session?.user.image;
+  useEffect(() => {
+    const profileImage = selectedImage || session?.user.image;
+    setImage(profileImage);
+  }, [selectedImage, session]);
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
+  // handle passwords from child
   const handlePassword = (data) => {
     setPassword(data);
   };
@@ -32,10 +46,10 @@ export default function editAccount() {
     setConfirmedPassword(data);
   };
 
+  // fetch user data
   useEffect(() => {
     const getUser = async () => {
       try {
-        setLoading(true);
         const res = await fetch("http://localhost:3000/api/register", {
           cache: "no-store",
         });
@@ -43,8 +57,17 @@ export default function editAccount() {
           throw new Error("Failed to fetch users");
         }
         const data = await res.json();
-        console.log(data.users);
-        setUser(data.users);
+        const users = data.users;
+        const user = users.filter((u) => {
+          return u.email === session?.user.email;
+        });
+        user.map((u) => {
+          setUserId(u._id);
+          setCurrentName(u.name);
+          setCurrentHashedPassword(u.hashedPassword);
+          setCurrentImage(u.image);
+          setCurrentSub(u.sub);
+        });
       } catch (error) {
         console.log("Error loading users: ", error);
       }
@@ -53,23 +76,22 @@ export default function editAccount() {
     getUser();
   }, []);
 
-  console.log(user);
   return (
     <div>
       <label
         className="btn btn-primary flex gap-1 items-center w-fit rounded-lg bg-transparent border-[1px] border-white"
-        htmlFor="modal-2"
+        htmlFor="modal-3"
       >
         <img src="/edit.svg" alt="" className="w-7" />
         <h1 className="text-lg">Edit</h1>
       </label>
 
-      <input className="modal-state" id="modal-2" type="checkbox" />
+      <input className="modal-state" id="modal-3" type="checkbox" />
       <div className="modal w-screen">
         <label className="modal-overlay" htmlFor="modal-2"></label>
-        <div className="modal-content flex flex-col gap-5 w-full h-[700px]">
+        <div className="modal-content flex flex-col gap-5 w-full">
           <label
-            htmlFor="modal-2"
+            htmlFor="modal-3"
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
           >
             ✕
@@ -77,7 +99,7 @@ export default function editAccount() {
           <div className="pt-5 flex">
             <div
               style={{
-                backgroundImage: `url(${profileImage})`,
+                backgroundImage: `url(${image})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
@@ -97,31 +119,45 @@ export default function editAccount() {
             <h1>Change name</h1>
             <input
               type="text"
-              value={name}
-              onChange={handleNameChange}
-              className="w-full rounded-md px-2 py-1"
+              defaultValue={session?.user.name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              className="w-full rounded-md px-2 py-1 outline-none"
             />
           </div>
-          <div className="flex flex-col gap-1 mt-5">
-            <h1>Change password</h1>
-            <PasswordInput passPassword={handlePassword} />
-          </div>
-          <div className="flex flex-col gap-1">
-            <h1>Confirm password</h1>
-            <PasswordInput passPassword={handleConfirmedPassword} />
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1 mt-5">
+              <h1>Change password</h1>
+              <PasswordInput passPassword={handlePassword} />
+            </div>
+            <div className="flex flex-col gap-1">
+              <h1>Confirm password</h1>
+              <PasswordInput passPassword={handleConfirmedPassword} />
+            </div>
           </div>
           <div className="flex flex-col gap-1 mt-3">
             <h1>Change biography</h1>
             <textarea
               rows="4"
               className="w-full px-2 py-1 outline-none rounded-md"
+              onChange={(e) => {
+                setBiography(e.target.value);
+              }}
             ></textarea>
-            {/* {user.length > 0 ? (
-              user.map((u) => <h1 key={u._id}>{u.name}</h1>)
-            ) : (
-              <p>No users available</p>
-            )} */}
           </div>
+          <EditUser
+            id={userId}
+            currentName={currentName}
+            currentHashedPassword={currentHashedPassword}
+            currentImage={currentImage}
+            currentSub={currentSub}
+            password={password}
+            confirmedPassword={confirmedPassword}
+            name={name}
+            image={image}
+            biography={biography}
+          />
         </div>
       </div>
     </div>

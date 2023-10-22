@@ -17,10 +17,23 @@ export default function RegisterPage() {
     router.push("/");
   }
 
+  const randomImages = [
+    "/user-image.webp",
+    "/user-image2.webp",
+    "/user-image3.png",
+    "/user-image4.jpg",
+  ];
+
+  function getRandomImage() {
+    const randomIndex = Math.floor(Math.random() * randomImages.length);
+    return randomImages[randomIndex];
+  }
+
   const createUser = async (e) => {
     e.preventDefault();
     try {
       const hashed = await bcrypt.hash(password, 10);
+      const randomImage = getRandomImage();
       const res = await fetch("http://localhost:3000/api/register", {
         method: "POST",
         headers: {
@@ -30,8 +43,8 @@ export default function RegisterPage() {
           name: name,
           email: email,
           hashedPassword: hashed,
-          image: "/user-image.webp",
-          biography: "",
+          image: randomImage,
+          sub: "",
         }),
       });
       if (res.ok) {

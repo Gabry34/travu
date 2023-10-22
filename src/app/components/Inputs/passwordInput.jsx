@@ -20,13 +20,13 @@ export default function passwordInput({ passPassword }) {
 
       {showPassword ? (
         <img
-          className="h-7 mr-2"
+          className="h-7 mr-2 cursor-pointer"
           src="/eyeNot.svg"
           onClick={togglePasswordVisibility}
         />
       ) : (
         <img
-          className="h-8 mr-2"
+          className="h-8 mr-2 cursor-pointer"
           src="/eyeShow.svg"
           onClick={togglePasswordVisibility}
         />

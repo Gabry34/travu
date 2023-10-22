@@ -3,8 +3,7 @@ import User from "@/app/models/user";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  const { name, email, hashedPassword, image, biography } =
-    await request.json();
+  const { name, email, hashedPassword, image, sub } = await request.json();
   await connectMongoDB();
   const user = await User.findOne({ email });
 
@@ -14,7 +13,7 @@ export async function POST(request) {
       email,
       hashedPassword,
       image,
-      biography,
+      sub,
     });
     return NextResponse.json({ message: "User Created" }, { status: 201 });
   }
