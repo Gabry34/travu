@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import ImagesSlider from "@/app/components/Modals/imagesSlider";
 
 const Page = () => {
   const [lastSegment, setLastSegment] = useState();
@@ -74,14 +75,7 @@ const Page = () => {
                         backgroundPosition: "center",
                       }}
                     >
-                      {travel.images[1] ? (
-                        <img
-                          src="/more-images.svg"
-                          className="w-16 cursor-pointer"
-                        />
-                      ) : (
-                        <p></p>
-                      )}
+                      {travel.images[1] ? <ImagesSlider /> : <p></p>}
                     </div>
                   ) : (
                     <img src="/no-image-white.svg" className="w-[500px]" />

@@ -100,36 +100,12 @@ const Page = ({ searchParams }) => {
     }
   });
 
-  const calculateDaysDifference = (startDate, endDate) => {
-    const startDateComponents = startDate.split("-");
-    const endDateComponents = endDate.split("-");
-
-    if (startDateComponents.length === 3 && endDateComponents.length === 3) {
-      const startDay = parseInt(startDateComponents[0], 10);
-      const startMonth = parseInt(startDateComponents[1], 10) - 1; // Mese inizia da 0 (gennaio)
-      const startYear = parseInt(startDateComponents[2], 10);
-
-      const endDay = parseInt(endDateComponents[0], 10);
-      const endMonth = parseInt(endDateComponents[1], 10) - 1; // Mese inizia da 0 (gennaio)
-      const endYear = parseInt(endDateComponents[2], 10);
-
-      const start = new Date(startYear, startMonth, startDay);
-      const end = new Date(endYear, endMonth, endDay);
-
-      const timeDifference = end - start;
-      const daysDifference = timeDifference / (1000 * 3600 * 24); // Calcola il numero di giorni
-
-      return daysDifference;
-    }
-
-    return 0; // Ritorna 0 se le date non sono valide
-  };
-
-  // ...
-
   const durationFilter = filteredYear.filter((t) => {
-    const daysDifference = calculateDaysDifference(t.startDate, t.endDate);
-    return !duration || daysDifference === duration;
+    if (duration) {
+      return duration === t.duration;
+    } else {
+      return true;
+    }
   });
 
   return (
