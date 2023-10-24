@@ -59,67 +59,77 @@ const Page = ({ searchParams }) => {
     if (minPrice && maxPrice) {
       const travelPrice = parseFloat(t.travelPrice);
       return (
-        !isNaN(travelPrice) && travelPrice > minPrice && travelPrice < maxPrice
+        !isNaN(travelPrice) &&
+        travelPrice >= minPrice &&
+        travelPrice <= maxPrice
       );
     } else if (minPrice && !maxPrice) {
       const travelPrice = parseFloat(t.travelPrice);
-      return !isNaN(travelPrice) && travelPrice > minPrice;
+      return !isNaN(travelPrice) && travelPrice >= minPrice;
     } else if (!minPrice && maxPrice) {
       const travelPrice = parseFloat(t.travelPrice);
-      return !isNaN(travelPrice) && travelPrice < maxPrice && travelPrice > 0;
+      return !isNaN(travelPrice) && travelPrice <= maxPrice && travelPrice > 0;
     } else if (!minPrice && !maxPrice) {
       return true;
     }
   });
 
-  const selectedMonthInt = parseInt(selectedMonth, 10);
-  const selectedYearInt = parseInt(selectedYear, 10);
-
   const filteredMonth = filteredPrices.filter((t) => {
-    if (!isNaN(selectedMonthInt) && !isNaN(selectedYearInt)) {
-      const startDate = t.startDate;
-      const [travelMonth, travelDay, travelYear] = startDate
-        .split("-")
-        .map(Number);
-
-      return selectedMonthInt === travelMonth && selectedYearInt === travelYear;
-    } else if (!isNaN(selectedMonthInt) && isNaN(selectedYearInt)) {
-      const startDate = t.startDate;
-      const [travelMonth] = startDate.split("-").map(Number);
-
-      return selectedMonthInt === travelMonth;
-    } else if (isNaN(selectedMonthInt) && !isNaN(selectedYearInt)) {
-      const startDate = t.startDate;
-      const [, , travelYear] = startDate.split("-").map(Number);
-
-      return selectedYearInt === travelYear;
+    if (selectedMonth) {
+      const dateComponents = t.startDate.split("-");
+      if (dateComponents.length === 3) {
+        const month = parseInt(dateComponents[1], 10);
+        const selectedMonthNumber = parseInt(selectedMonth, 10);
+        return month === selectedMonthNumber;
+      }
     } else {
       return true;
     }
   });
 
-  const filteredDuration = filteredMonth.filter((t) => {
-    const durationInt = parseInt(duration, 10);
-    if (durationInt) {
-      const start = t.startDate;
-      const end = t.endDate;
-
-      function giorniTraDate(data1, data2) {
-        const data1Arr = data1.split("-");
-        const data2Arr = data2.split("-");
-        const data1Obj = new Date(data1Arr[0], data1Arr[1] - 1, data1Arr[2]);
-        const data2Obj = new Date(data2Arr[0], data2Arr[1] - 1, data2Arr[2]);
-        const differenzaMs = Math.abs(data2Obj - data1Obj);
-        const giorni = Math.floor(differenzaMs / (1000 * 60 * 60 * 24));
-        return giorni;
+  const filteredYear = filteredMonth.filter((t) => {
+    if (selectedYear) {
+      const dateComponents = t.startDate.split("-");
+      if (dateComponents.length === 3) {
+        const year = parseInt(dateComponents[2], 10);
+        const selectedYearNumber = parseInt(selectedYear, 10);
+        return year === selectedYearNumber;
       }
-
-      console.log(giorniTraDate(start, end));
-
-      return giorniTraDate(start, end) === durationInt;
     } else {
       return true;
     }
+  });
+
+  const calculateDaysDifference = (startDate, endDate) => {
+    const startDateComponents = startDate.split("-");
+    const endDateComponents = endDate.split("-");
+
+    if (startDateComponents.length === 3 && endDateComponents.length === 3) {
+      const startDay = parseInt(startDateComponents[0], 10);
+      const startMonth = parseInt(startDateComponents[1], 10) - 1; // Mese inizia da 0 (gennaio)
+      const startYear = parseInt(startDateComponents[2], 10);
+
+      const endDay = parseInt(endDateComponents[0], 10);
+      const endMonth = parseInt(endDateComponents[1], 10) - 1; // Mese inizia da 0 (gennaio)
+      const endYear = parseInt(endDateComponents[2], 10);
+
+      const start = new Date(startYear, startMonth, startDay);
+      const end = new Date(endYear, endMonth, endDay);
+
+      const timeDifference = end - start;
+      const daysDifference = timeDifference / (1000 * 3600 * 24); // Calcola il numero di giorni
+
+      return daysDifference;
+    }
+
+    return 0; // Ritorna 0 se le date non sono valide
+  };
+
+  // ...
+
+  const durationFilter = filteredYear.filter((t) => {
+    const daysDifference = calculateDaysDifference(t.startDate, t.endDate);
+    return !duration || daysDifference === duration;
   });
 
   return (
@@ -144,7 +154,7 @@ const Page = ({ searchParams }) => {
           </div>
         ) : (
           <div className="w-full flex flex-wrap pt-10 gap-5 bg-customBlack">
-            {filteredDuration.map((t) => (
+            {durationFilter.map((t) => (
               <div
                 className="w-[325px] rounded-xl bg-white bg-opacity-5 hover:bg-gray-500 hover:bg-opacity-10"
                 key={t._id}

@@ -36,6 +36,7 @@ export default function Posted({}) {
           description,
           travelPrice,
           daysDescriptions,
+          duration,
           userName,
           userEmail,
           userImage,
@@ -57,6 +58,25 @@ export default function Posted({}) {
       console.log(error);
     }
   };
+
+  function calculateDaysDifference(startDate, endDate) {
+    const startParts = startDate.split("-").map(Number);
+    const endParts = endDate.split("-").map(Number);
+
+    const startDateObj = new Date(
+      startParts[2],
+      startParts[1] - 1,
+      startParts[0]
+    );
+    const endDateObj = new Date(endParts[2], endParts[1] - 1, endParts[0]);
+    const timeDifference = endDateObj - startDateObj;
+
+    const daysDifference = Math.floor(timeDifference / (24 * 60 * 60 * 1000));
+
+    return daysDifference + 1;
+  }
+
+  const duration = calculateDaysDifference(startDate, endDate);
 
   return (
     <div className="w-full px-20 py-16 pb-7 mt-10 flex flex-col gap-10 border-[1px] border-white rounded-xl shadow-lg shadow-black">

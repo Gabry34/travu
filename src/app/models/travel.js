@@ -11,6 +11,7 @@ const travelSchema = new Schema(
     description: String,
     travelPrice: String,
     daysDescriptions: Array,
+    duration: String,
     userName: String,
     userEmail: String,
     userImage: String,
