@@ -51,36 +51,36 @@ const Card = ({ travel, isDashboard }) => {
             </p>
           </div>
           <div className="mt-3 flex items-center gap-2">
-            <img
+            {/* <img
               src="/time.svg"
               alt=""
               className="w-6 select-none"
               draggable={false}
-            />
+            /> */}
             <p className="select-none" draggable={false}>
-              {travel.startDate} - {travel.endDate}
+              - {travel.startDate} - {travel.endDate}
             </p>
           </div>
           <div className="flex items-center gap-2 mt-1">
-            <img
+            {/* <img
               src="/pin-red.svg"
               alt=""
               className="w-6 select-none"
               draggable={false}
-            />
+            /> */}
             <p className="select-none" draggable={false}>
-              {travel.city}, {travel.state}
+              - {travel.city}, {travel.state}
             </p>
           </div>
           <div className="flex items-center gap-2 mt-1">
-            <img
+            {/* <img
               src="/money.svg"
               alt=""
               className="w-6 select-none"
               draggable={false}
-            />
+            /> */}
             <p className="select-none" draggable={false}>
-              ${travel.travelPrice}
+              - ${travel.travelPrice}
             </p>
           </div>
         </div>

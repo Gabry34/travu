@@ -70,13 +70,13 @@ const CitiesSearchbar = () => {
             <input
               type="text"
               className="w-full h-full px-3 outline-none rounded-lg text-white text-lg font-light"
-              placeholder="Search a city or a country..."
+              placeholder="Search a city..."
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             />
             <img src="/search.svg" alt="" className="w-5" />
           </label>
-          <div className="scroll dropdown-menu dropdown-menu-bottom-center w-full max-h-[350px] overflow-y-scroll pt-0 px-0">
+          <div className="scroll dropdown-menu dropdown-menu-bottom-center w-full max-h-[350px] overflow-y-scroll p-2 ">
             {filteredCities.slice(0, 100).map((city, index) => {
               return (
                 <Link

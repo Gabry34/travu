@@ -72,7 +72,7 @@ const CitiesDropdown = () => {
           <input
             type="text"
             className="w-full rounded-full h-12 px-7 pl-3 text-white text-2xl outline-none bg-transparent"
-            placeholder="Search a city or a country..."
+            placeholder="Search a city or country..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />
@@ -93,7 +93,7 @@ const CitiesDropdown = () => {
                       country: city.country_name,
                     },
                   }}
-                  className="py-2 px-2 cursor-pointer hover:bg-zinc-700 rounded-md flex gap-3"
+                  className="py-2 px-2 cursor-pointer hover:bg-zinc-700 hover:bg-opacity-70 rounded-md flex gap-3"
                 >
                   <img src="/pin-black.svg" className="w-8" />
                   <div>

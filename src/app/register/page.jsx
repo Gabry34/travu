@@ -33,7 +33,6 @@ export default function RegisterPage() {
     e.preventDefault();
     try {
       const hashed = await bcrypt.hash(password, 10);
-      const randomImage = getRandomImage();
       const res = await fetch("http://localhost:3000/api/register", {
         method: "POST",
         headers: {
@@ -43,12 +42,28 @@ export default function RegisterPage() {
           name: name,
           email: email,
           hashedPassword: hashed,
-          image: randomImage,
-          sub: "",
         }),
       });
       if (res.ok) {
-        router.push("/login");
+        try {
+          const randomImage = getRandomImage();
+          const res = await fetch("http://localhost:3000/api/userInfo", {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+              email: email,
+              image: randomImage,
+              biography: "no biography",
+            }),
+          });
+          if (res.ok) {
+            router.push("/login");
+          }
+        } catch (error) {
+          console.log(error);
+        }
       } else {
         setError("Email already in use");
         throw new Error("Failed to create a user");

@@ -19,6 +19,7 @@
     "@prisma/client": "^5.3.1",
     "autoprefixer": "10.4.15",
     "bcryptjs-react": "^2.4.6",
+    "date-fns": "^2.30.0",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
     "mongoose": "^7.6.2",

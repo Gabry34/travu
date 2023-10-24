@@ -28,7 +28,6 @@ const Page = () => {
         }
         const data = await res.json();
         setTravels(data.travels);
-        setDaysDescriptions(data.travels.daysDescriptions);
         setLoading(false);
       } catch (error) {
         console.log("Error loading travels: ", error);
@@ -38,11 +37,15 @@ const Page = () => {
     getTravels();
   }, []);
 
-  const idInt = parseInt(lastSegment, 10);
-
   const travelInfo = travels.filter((t) => {
     return t._id === lastSegment;
   });
+
+  useEffect(() => {
+    travelInfo.map((t) => {
+      setDaysDescriptions(t.daysDescriptions);
+    });
+  }, [travelInfo]);
 
   return (
     <div className="bg-customBlack pt-5 flex flex-col px-20">

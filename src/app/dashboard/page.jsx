@@ -1,17 +1,20 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Card from "../components/Cards/Card";
 import SkeletonCards from "../components/Cards/SkeletonCards";
-import EditAccount from "../components/Buttons/editAccount";
+import EditAccount from "../components/Modals/editAccount";
 import Link from "next/link";
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
   const [travels, setTravels] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [image, setImage] = useState("");
+  const [biography, setBiography] = useState("");
+  const [userInfoId, setUserInfoId] = useState("");
   const router = useRouter();
   console.log(session);
   const useremail = session?.user.email;
@@ -41,6 +44,33 @@ export default function DashboardPage() {
     return t.userEmail === useremail;
   });
 
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/userInfo", {
+          cache: "no-store",
+        });
+        if (!res.ok) {
+          throw new Error("Failed to fetch userInfo");
+        }
+        const data = await res.json();
+        const userInfos = data.userInfo;
+        const userInfo = userInfos.filter((t) => {
+          return t.email === useremail;
+        });
+        userInfo.map((t) => {
+          setImage(t.image);
+          setBiography(t.biography);
+          setUserInfoId(t._id);
+        });
+      } catch (error) {
+        console.log("Error loading userInfos: ", error);
+      }
+    };
+
+    getUserInfo();
+  }, [session]);
+
   if (status === "loading") {
     return (
       <div className="w-full h-screen bg-customBlack flex justify-center items-center">
@@ -60,7 +90,7 @@ export default function DashboardPage() {
         <div className="flex gap-10 justify-start w-full bg-white bg-opacity-5 px-10 py-8 rounded-3xl">
           <div
             style={{
-              backgroundImage: `url(${session?.user.image})`,
+              backgroundImage: `url(${image})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -68,11 +98,11 @@ export default function DashboardPage() {
           ></div>
           <div className="flex flex-col justify-between">
             <div>
-              <h1 className="text-2xl">{session?.user.name}</h1>
+              <h1 className="text-3xl">{session?.user.name}</h1>
               <h1 className="text-md opacity-40">{session?.user.email}</h1>
-              <h1>{session?.user.sub}</h1>
+              <h1 className="mt-4 font-Poppins text-lg">{biography}</h1>
             </div>
-            <EditAccount />
+            <EditAccount userInfoId={userInfoId} />
           </div>
         </div>
       </div>

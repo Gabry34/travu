@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs-react";
 import { signOut } from "next-auth/react";
 
 export default function EditUser({
+  userInfoId,
   id,
   currentName,
   name,
@@ -27,7 +28,7 @@ export default function EditUser({
   };
 
   const newImage = image || currentImage;
-  const newSub = biography || currentSub;
+  const newBiography = biography || currentSub;
 
   const editUser = async (e) => {
     e.preventDefault();
@@ -44,15 +45,35 @@ export default function EditUser({
             body: JSON.stringify({
               newName,
               newHashedPassword: hashedPassword,
-              newImage,
-              newSub,
             }),
           });
 
           if (!res.ok) {
             throw new Error("Failed to update register");
           } else {
-            signOut();
+            try {
+              const res = await fetch(
+                `http://localhost:3000/api/userInfo/${userInfoId}`,
+                {
+                  method: "PUT",
+                  headers: {
+                    "Content-type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    newImage,
+                    newBiography,
+                  }),
+                }
+              );
+
+              if (!res.ok) {
+                throw new Error("Failed to update userInfo");
+              } else {
+                signOut();
+              }
+            } catch (error) {
+              setError("Failed to update userInfo: " + error.message);
+            }
           }
         } catch (error) {
           setError("Failed to update user: " + error.message);
@@ -62,7 +83,6 @@ export default function EditUser({
       setError("Passwords don't match");
     }
   };
-
   return (
     <>
       <button onClick={editUser} className="w-full py-1 bg-blue-900 rounded-md">

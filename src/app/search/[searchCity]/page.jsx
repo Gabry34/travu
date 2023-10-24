@@ -57,43 +57,49 @@ const Page = ({ searchParams }) => {
 
   const filteredPrices = filteredTravels.filter((t) => {
     if (minPrice && maxPrice) {
-      return minPrice <= t.travelPrice && maxPrice >= t.travelPrice;
+      const travelPrice = parseFloat(t.travelPrice);
+      return (
+        !isNaN(travelPrice) && travelPrice > minPrice && travelPrice < maxPrice
+      );
     } else if (minPrice && !maxPrice) {
-      return minPrice <= t.travelPrice;
+      const travelPrice = parseFloat(t.travelPrice);
+      return !isNaN(travelPrice) && travelPrice > minPrice;
     } else if (!minPrice && maxPrice) {
-      return maxPrice >= t.travelPrice;
+      const travelPrice = parseFloat(t.travelPrice);
+      return !isNaN(travelPrice) && travelPrice < maxPrice && travelPrice > 0;
     } else if (!minPrice && !maxPrice) {
       return true;
     }
   });
 
   const selectedMonthInt = parseInt(selectedMonth, 10);
-
-  const filteredMonth = filteredPrices.filter((t) => {
-    if (!isNaN(selectedMonthInt)) {
-      const startDate = new Date(t.startDate);
-      const month = startDate.getMonth() + 1;
-      return selectedMonthInt === month;
-    } else {
-      return true;
-    }
-  });
-
   const selectedYearInt = parseInt(selectedYear, 10);
 
-  const filteredYear = filteredMonth.filter((t) => {
-    if (!isNaN(selectedYearInt)) {
-      const startDate = new Date(t.startDate);
-      const year = startDate.getFullYear();
-      return selectedYearInt === year;
+  const filteredMonth = filteredPrices.filter((t) => {
+    if (!isNaN(selectedMonthInt) && !isNaN(selectedYearInt)) {
+      const startDate = t.startDate;
+      const [travelMonth, travelDay, travelYear] = startDate
+        .split("-")
+        .map(Number);
+
+      return selectedMonthInt === travelMonth && selectedYearInt === travelYear;
+    } else if (!isNaN(selectedMonthInt) && isNaN(selectedYearInt)) {
+      const startDate = t.startDate;
+      const [travelMonth] = startDate.split("-").map(Number);
+
+      return selectedMonthInt === travelMonth;
+    } else if (isNaN(selectedMonthInt) && !isNaN(selectedYearInt)) {
+      const startDate = t.startDate;
+      const [, , travelYear] = startDate.split("-").map(Number);
+
+      return selectedYearInt === travelYear;
     } else {
       return true;
     }
   });
 
-  const durationInt = parseInt(duration, 10);
-
-  const filteredDuration = filteredYear.filter((t) => {
+  const filteredDuration = filteredMonth.filter((t) => {
+    const durationInt = parseInt(duration, 10);
     if (durationInt) {
       const start = t.startDate;
       const end = t.endDate;
@@ -107,6 +113,8 @@ const Page = ({ searchParams }) => {
         const giorni = Math.floor(differenzaMs / (1000 * 60 * 60 * 24));
         return giorni;
       }
+
+      console.log(giorniTraDate(start, end));
 
       return giorniTraDate(start, end) === durationInt;
     } else {

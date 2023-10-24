@@ -4,7 +4,7 @@ import years from "@/app/data/years.json";
 import Link from "next/link";
 
 const Filters = ({ city, country }) => {
-  const [minPrice, setMinPrice] = useState(0);
+  const [minPrice, setMinPrice] = useState();
   const [maxPrice, setMaxPrice] = useState();
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedYear, setSelectedYear] = useState("");

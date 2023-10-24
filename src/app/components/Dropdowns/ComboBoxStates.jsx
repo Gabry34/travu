@@ -5,7 +5,9 @@ import { Combobox } from "@headlessui/react";
 import States from "@/app/data/states.json";
 
 export default function MyCombobox({ passState }) {
-  const [selectedPerson, setSelectedPerson] = useState("United States");
+  const [selectedPerson, setSelectedPerson] = useState(
+    localStorage.getItem("state")
+  );
   const [query, setQuery] = useState("");
 
   const filteredPeople =
@@ -20,7 +22,7 @@ export default function MyCombobox({ passState }) {
   }, [selectedPerson]);
 
   return (
-    <Combobox value={selectedPerson} onChange={setSelectedPerson}>
+    <Combobox defaultValue={selectedPerson} onChange={setSelectedPerson}>
       <Combobox.Input
         className="px-1"
         onChange={(event) => setQuery(event.target.value)}

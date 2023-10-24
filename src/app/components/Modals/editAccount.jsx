@@ -3,9 +3,9 @@
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import PasswordInput from "../Inputs/passwordInput";
-import EditUser from "./editUser";
+import EditUser from "../Buttons/editUser";
 
-export default function editAccount() {
+export default function editAccount({ userInfoId }) {
   const { data: session, status } = useSession();
   const [selectedImage, setSelectedImage] = useState(null);
   const [name, setName] = useState(session?.user.name);
@@ -31,11 +31,6 @@ export default function editAccount() {
       reader.readAsDataURL(file);
     }
   };
-
-  useEffect(() => {
-    const profileImage = selectedImage || session?.user.image;
-    setImage(profileImage);
-  }, [selectedImage, session]);
 
   // handle passwords from child
   const handlePassword = (data) => {
@@ -65,8 +60,6 @@ export default function editAccount() {
           setUserId(u._id);
           setCurrentName(u.name);
           setCurrentHashedPassword(u.hashedPassword);
-          setCurrentImage(u.image);
-          setCurrentSub(u.sub);
         });
       } catch (error) {
         console.log("Error loading users: ", error);
@@ -76,11 +69,43 @@ export default function editAccount() {
     getUser();
   }, []);
 
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/userInfo", {
+          cache: "no-store",
+        });
+        if (!res.ok) {
+          throw new Error("Failed to fetch userInfo");
+        }
+        const data = await res.json();
+        const userInfos = data.userInfo;
+        const userInfo = userInfos.filter((t) => {
+          return t.email === session?.user.email;
+        });
+        userInfo.map((t) => {
+          setCurrentImage(t.image);
+          setCurrentSub(t.biography);
+        });
+        console.log(userInfo);
+      } catch (error) {
+        console.log("Error loading userInfos: ", error);
+      }
+    };
+
+    getUserInfo();
+  }, [session]);
+
+  const handleImage = () => {
+    const profileImage = selectedImage || currentImage;
+    setImage(profileImage);
+  };
   return (
     <div>
       <label
-        className="btn btn-primary flex gap-1 items-center w-fit rounded-lg bg-transparent border-[1px] border-white"
+        className="btn btn-primary flex gap-1 items-center w-fit rounded-lg bg-transparent border-[1px] border-white px-0"
         htmlFor="modal-3"
+        onClick={handleImage}
       >
         <img src="/edit.svg" alt="" className="w-7" />
         <h1 className="text-lg">Edit</h1>
@@ -147,6 +172,7 @@ export default function editAccount() {
             ></textarea>
           </div>
           <EditUser
+            userInfoId={userInfoId}
             id={userId}
             currentName={currentName}
             currentHashedPassword={currentHashedPassword}

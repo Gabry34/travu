@@ -17,9 +17,13 @@ export default function Informations({
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [days, setDays] = useState();
-  const [travelPrice, setTravelPrice] = useState("");
-  const [shortDescription, setShortDescription] = useState("");
-  const [title, setTitle] = useState("");
+  const [travelPrice, setTravelPrice] = useState(
+    localStorage.getItem("travelPrice")
+  );
+  const [shortDescription, setShortDescription] = useState(
+    localStorage.getItem("shortDescription")
+  );
+  const [title, setTitle] = useState(localStorage.getItem("title"));
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
 
@@ -85,6 +89,7 @@ export default function Informations({
         <input
           type="text"
           className="w-[230px] px-1 text-lg rounded-sm"
+          defaultValue={title}
           onChange={(e) => {
             setTitle(e.target.value);
           }}
@@ -142,6 +147,7 @@ export default function Informations({
           <input
             type="number"
             className="w-[230px] px-1 text-lg rounded-sm"
+            defaultValue={travelPrice}
             max={100000000}
             onChange={(e) => {
               setTravelPrice(e.target.value);
@@ -159,6 +165,7 @@ export default function Informations({
           cols="100"
           rows="5"
           className="px-1 py-1 text-lg rounded-sm"
+          defaultValue={shortDescription}
           maxLength={1500}
           onChange={(e) => {
             setShortDescription(e.target.value);
