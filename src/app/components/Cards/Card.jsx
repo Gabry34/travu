@@ -1,5 +1,6 @@
 import React from "react";
 import DeleteButton from "../Buttons/deleteButton";
+import LikeButton from "../Buttons/likeButton";
 
 const Card = ({ travel, isDashboard }) => {
   const truncatedDescription = travel.description
@@ -28,7 +29,9 @@ const Card = ({ travel, isDashboard }) => {
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-        ></div>
+        >
+          <LikeButton travelId={travel._id} />
+        </div>
       )}
       <div
         className="flex gap-1 flex-col justify-around px-1 w-full select-none"

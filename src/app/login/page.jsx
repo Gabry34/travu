@@ -149,6 +149,13 @@ export default function LoginPage() {
               >
                 Sign in
               </button>
+              <button
+                onClick={() => {
+                  signIn();
+                }}
+              >
+                sign in
+              </button>
             </div>
           </form>
           <p className="mt-10 text-center text-sm text-gray-500">

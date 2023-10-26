@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import bcrypt from "bcryptjs-react";
+import { FcGoogle } from "react-icons/fc";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -165,12 +166,21 @@ export default function RegisterPage() {
               </div>
             ) : null}
 
-            <div>
+            <div className="flex flex-col gap-3">
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Register
+              </button>
+              <button
+                className="w-full flex gap-2 justify-center items-center bg-white py-2 rounded-md"
+                onClick={() => {
+                  signIn();
+                }}
+              >
+                <FcGoogle size={22} />
+                <h1 className="text-black">Sign-in with Google</h1>
               </button>
             </div>
           </form>

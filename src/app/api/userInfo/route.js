@@ -3,12 +3,13 @@ import UserInfo from "@/app/models/userInfo";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  const { email, image, biography } = await request.json();
+  const { email, image, biography, likedPosts } = await request.json();
   await connectMongoDB();
   await UserInfo.create({
     email,
     image,
     biography,
+    likedPosts,
   });
   return NextResponse.json({ message: "UserInfo Created" }, { status: 201 });
 }

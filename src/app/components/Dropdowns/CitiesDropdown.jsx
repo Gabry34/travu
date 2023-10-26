@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Cities from "@/app/data/cities.json";
-import { useState } from "react";
 import Link from "next/link";
 
-const CitiesDropdown = () => {
+const CitiesSearchbar = () => {
   const [inputValue, setInputValue] = useState("");
 
   const filteredCities = Cities.filter((c) => {
@@ -60,26 +59,25 @@ const CitiesDropdown = () => {
     const newValue = `${city}, ${country}`;
     setInputValue(newValue);
   };
-
-  const resetInput = () => {
-    setInputValue("");
-  };
-
   return (
-    <div className="dropdown w-full flex justify-center items-center">
-      <div className="w-2/5">
-        <div className="flex bg-transparent border-[1px] border-neutral-500 rounded-lg pr-3">
-          <input
-            type="text"
-            className="w-full rounded-full h-12 px-7 pl-3 text-white text-2xl outline-none bg-transparent"
-            placeholder="Search a city or country..."
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-        </div>
-        <div className="dropdown-container bg-customBlack w-full justify-start pr-10 mt-1">
-          <div className="scroll dropdown-menu dropdown-menu-bottom-center w-2/5 bg-customBlack bg-opacity-[95%] max-h-[350px] overflow-y-scroll border-[1px] border-white">
-            {filteredCities.slice(0, 300).map((city, index) => {
+    <div className="z-50">
+      <div className="dropdown-container">
+        <div className="dropdown border-[1px] rounded-full">
+          <label
+            className="btn btn-solid-primary px-0 w-[400px] bg-transparent hover:bg-transparent cursor-default pr-3 rounded-full"
+            tabIndex="0"
+          >
+            <input
+              type="text"
+              className="w-full h-full px-5 outline-none rounded-full text-white text-lg font-light bg-transparent"
+              placeholder="Search a city..."
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+            <img src="/search.svg" alt="" className="w-5" />
+          </label>
+          <div className="scroll dropdown-menu dropdown-menu-bottom-center w-full max-h-[350px] overflow-y-scroll p-2 mt-2 z-50">
+            {filteredCities.slice(0, 100).map((city, index) => {
               return (
                 <Link
                   key={index}
@@ -93,7 +91,7 @@ const CitiesDropdown = () => {
                       country: city.country_name,
                     },
                   }}
-                  className="py-2 px-2 cursor-pointer hover:bg-zinc-700 hover:bg-opacity-70 rounded-md flex gap-3"
+                  className="py-2 px-2 cursor-pointer hover:bg-zinc-700 rounded-md flex gap-3"
                 >
                   <img src="/pin-black.svg" className="w-8" />
                   <div>
@@ -110,4 +108,4 @@ const CitiesDropdown = () => {
   );
 };
 
-export default CitiesDropdown;
+export default CitiesSearchbar;

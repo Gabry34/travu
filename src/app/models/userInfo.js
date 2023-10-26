@@ -5,6 +5,7 @@ const userInfoSchema = new Schema(
     email: String,
     image: String,
     biography: String,
+    likedPosts: Array,
   },
   {
     timestamps: true,

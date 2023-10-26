@@ -24,6 +24,9 @@ module.exports = {
         Lato: ["Lato"],
         Mulish: ["Mulish"],
         satoshi: ["Satoshi"],
+        Montserrat: "Montserrat",
+        Playfair: "Playfair Display",
+        Frank: "Frank Ruhl Libre",
       },
       backgroundImage: {
         bgImage: "url('/paesaggio')",

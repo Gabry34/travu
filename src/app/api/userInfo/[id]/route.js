@@ -4,11 +4,16 @@ import { NextResponse } from "next/server";
 
 export async function PUT(request, { params }) {
   const { id } = params;
-  const { newImage: image, newBiography: biography } = await request.json();
+  const {
+    newImage: image,
+    newBiography: biography,
+    newLikedPosts: likedPosts,
+  } = await request.json();
   await connectMongoDB();
   await UserInfo.findByIdAndUpdate(id, {
     image,
     biography,
+    likedPosts,
   });
   return NextResponse.json({ message: "UserInfo updated" }, { status: 200 });
 }
