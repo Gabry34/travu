@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const HomeNav = () => {
   return (
-    <div className="bg-transparent absolute w-full h-10 grid grid-cols-3 px-20 pt-5 items-center z-50">
+    <div className="bg-transparent absolute w-full h-10 grid grid-cols-3 px-20 pt-5 items-center z-50 sm:px-5">
       <a
         className="gap-2 font-Tenor text-3xl flex items-center pl-4 font-light select-none"
         draggable={false}

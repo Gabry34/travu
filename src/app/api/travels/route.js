@@ -17,6 +17,7 @@ export async function POST(request) {
     userName,
     userEmail,
     userImage,
+    userId,
   } = await request.json();
   await connectMongoDB();
   await Travel.create({
@@ -33,6 +34,7 @@ export async function POST(request) {
     userName,
     userEmail,
     userImage,
+    userId,
   });
   return NextResponse.json({ message: "Travel Created" }, { status: 201 });
 }

@@ -1,98 +1,75 @@
 import React from "react";
 import DeleteButton from "../Buttons/deleteButton";
 import LikeButton from "../Buttons/likeButton";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import Avatar from "../ui/Avatar";
 
 const Card = ({ travel, isDashboard }) => {
-  const truncatedDescription = travel.description
-    .split(" ")
-    .slice(0, 25)
-    .join(" ");
-
+  const { data: session } = useSession();
   const goToTravelInformation = (id) => {
     window.location.href = `/search/${travel.city}_${travel.state}/${travel.title}/${id}`;
   };
 
   return (
     <div
-      className="rounded-xl flex flex-col gap-1 p-2 select-none"
-      draggable={false}
+      className="rounded-xl flex flex-col gap-1 p-2 select-none hover:bg-white hover:bg-opacity-5 cursor-pointer"
+      onClick={() => goToTravelInformation(travel._id)}
     >
-      {!travel.images[0] ? (
-        <div className="min-w-[300px] h-[170px] rounded-xl flex justify-center items-center bg-gray-600 bg-opacity-10">
-          <img src="/noimage.svg" className="w-24" />
+      <div className="min-w-[300px] h-[300px] rounded-xl relative">
+        {travel.images[0] ? (
+          <Image
+            src={travel.images[0].base64URL}
+            alt={travel.title}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-xl"
+          />
+        ) : (
+          <Image
+            src="/noimage.svg"
+            alt="No Image"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-xl"
+          />
+        )}
+        <div className="z-10 absolute top-0 left-0 right-0 bottom-0 p-1">
+          {session ? <LikeButton travelId={travel._id} /> : null}
         </div>
-      ) : (
-        <div
-          className="min-w-[300px] h-[200px] rounded-sm rounded-t-lg"
-          style={{
-            backgroundImage: `url(${travel.images[0].base64URL})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <LikeButton travelId={travel._id} />
-        </div>
-      )}
-      <div
-        className="flex gap-1 flex-col justify-around px-1 w-full select-none"
-        draggable={false}
-      >
+      </div>
+      <div className="flex gap-1 flex-col justify-around px-1 w-full select-none">
         <div className="flex flex-col gap-2">
-          <h1
-            className="text-2xl font-Poppins first-letter:uppercase pt-1 overflow-hidden break-words select-none"
-            draggable={false}
-          >
-            {travel.title}
-          </h1>
-          <div className="min-h-[95px] max-h-[95px] overflow-hidden">
-            <p
-              className="max-w-full overflow-hidden break-words h-full select-none"
-              draggable={false}
-            >
-              {truncatedDescription}
-              {travel.description.length > 25 ? <span>...</span> : null}
+          <div className="flex items-center justify-between">
+            <h1 className="text-xl font-medium font-Montserrat first-letter:uppercase pt-1 overflow-hidden break-words select-none">
+              {travel.title}
+            </h1>
+            <Avatar userId={travel.userId} />
+          </div>
+          <div className="flex items-center gap-2">
+            <p className="select-none text-sm text-opacity-50 text-white">
+              {travel.city}, {travel.state}
             </p>
           </div>
-          <div className="mt-3 flex items-center gap-2">
-            {/* <img
-              src="/time.svg"
-              alt=""
-              className="w-6 select-none"
-              draggable={false}
-            /> */}
-            <p className="select-none" draggable={false}>
-              - {travel.startDate} - {travel.endDate}
-            </p>
-          </div>
-          <div className="flex items-center gap-2 mt-1">
-            {/* <img
-              src="/pin-red.svg"
-              alt=""
-              className="w-6 select-none"
-              draggable={false}
-            /> */}
-            <p className="select-none" draggable={false}>
-              - {travel.city}, {travel.state}
-            </p>
-          </div>
-          <div className="flex items-center gap-2 mt-1">
-            {/* <img
-              src="/money.svg"
-              alt=""
-              className="w-6 select-none"
-              draggable={false}
-            /> */}
-            <p className="select-none" draggable={false}>
-              - ${travel.travelPrice}
-            </p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <p className="select-none text-sm text-opacity-50 text-white">
+                {travel.startDate} - {travel.endDate}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <p className="select-none text-sm text-opacity-50 text-white">
+                ${travel.travelPrice}
+              </p>
+            </div>
           </div>
         </div>
-        <button
+        {/* <button
           className="w-full py-1 px-2 bg-blue-900 rounded-md mt-3"
           onClick={() => goToTravelInformation(travel._id)}
         >
           View
-        </button>
+        </button> */}
         {isDashboard ? <DeleteButton id={travel._id} /> : null}
       </div>
     </div>

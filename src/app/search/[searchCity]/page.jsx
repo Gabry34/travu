@@ -110,34 +110,42 @@ const Page = ({ searchParams }) => {
 
   return (
     <div className="max-w-screen bg-customBlack flex flex-col gap-5">
-      <div className="grid grid-cols-3 items-center px-20 pt-10">
-        <CitiesSearchbar />
-        <div className="flex justify-center items-center ">
+      <div className="grid grid-cols-3 items-center px-20 pt-10 md:px-5 md:grid-cols-1">
+        <CitiesSearchbar
+          city={searchParams.city}
+          country={searchParams.country}
+        />
+        <div className="flex justify-center items-center">
           {city ? (
-            <h1 className="text-2xl text-center">
+            <h1 className="text-2xl text-center xl:hidden">
               Results for "{city}, {country}"
             </h1>
           ) : (
-            <h1 className="text-3xl">All Cities</h1>
+            <h1 className="text-3xl xl:hidden">All Cities</h1>
           )}
         </div>
-        <Filters city={city} country={country} />
+        <div className="flex items-center justify-end gap-10 pr-5 md:justify-start">
+          <Filters city={city} country={country} />
+        </div>
       </div>
-      <div className="flex w-full px-20 justify-center gap-5">
+      <div className="flex w-full px-20 pb-10 justify-center gap-5 md:px-5">
         {loading ? (
           <div className="h-[700px] flex items-center justify-center">
             <progress className="progress w-[500px] h-3"></progress>
           </div>
         ) : (
-          <div className="w-full flex flex-wrap pt-10 gap-5 bg-customBlack">
-            {durationFilter.map((t) => (
-              <div
-                className="w-[325px] rounded-xl bg-white bg-opacity-5 hover:bg-gray-500 hover:bg-opacity-10"
-                key={t._id}
-              >
-                <Card travel={t} />
+          <div className="w-full flex flex-wrap pt-10 gap-5 bg-customBlack sm:justify-center">
+            {durationFilter.length > 0 ? (
+              durationFilter.map((t) => (
+                <div className="w-[325px] rounded-xl" key={t._id}>
+                  <Card travel={t} />
+                </div>
+              ))
+            ) : (
+              <div className="w-full text-center text-2xl">
+                No posts match the selected filters.
               </div>
-            ))}
+            )}
           </div>
         )}
       </div>

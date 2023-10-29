@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 export default function Posted({}) {
   const router = useRouter();
   const { data: session, status } = useSession();
+  const [userId, setUserId] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const title = localStorage.getItem("title");
   const city = localStorage.getItem("city");
@@ -18,6 +20,31 @@ export default function Posted({}) {
   const userName = session?.user.name;
   const userEmail = session?.user.email;
   const userImage = session?.user.image;
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/register", {
+          cache: "no-store",
+        });
+        if (!res.ok) {
+          throw new Error("Failed to fetch users");
+        }
+        const data = await res.json();
+        const users = data.users;
+        const user = users.filter((u) => {
+          return u.email === session?.user.email;
+        });
+        user.map((u) => {
+          setUserId(u._id);
+        });
+      } catch (error) {
+        console.log("Error loading users: ", error);
+      }
+    };
+
+    getUser();
+  }, []);
 
   const createTravel = async () => {
     try {
@@ -40,6 +67,7 @@ export default function Posted({}) {
           userName,
           userEmail,
           userImage,
+          userId,
         }),
       });
       if (res.ok) {
@@ -78,6 +106,13 @@ export default function Posted({}) {
 
   const duration = calculateDaysDifference(startDate, endDate);
 
+  const handlePost = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 10000);
+  };
+
   return (
     <div className="w-full px-20 py-16 pb-7 mt-10 flex flex-col gap-10 border-[1px] border-white rounded-xl shadow-lg shadow-black">
       <div className="w-full flex justify-center">
@@ -104,9 +139,11 @@ export default function Posted({}) {
           <h1 className="text-4xl font-semibold">End Date:</h1>
           <p className="text-4xl">{localStorage.getItem("endDate")}</p>
         </div>
-        <div className="flex flex-col gap-2 ">
+        <div className="flex flex-col gap-2 w-full">
           <h1 className="text-4xl font-semibold">Short description:</h1>
-          <p className="text-2xl">{localStorage.getItem("shortDescription")}</p>
+          <p className="text-2xl" style={{ wordWrap: "break-word" }}>
+            {localStorage.getItem("shortDescription")}
+          </p>
         </div>
         <div className="flex items-end gap-2 ">
           <h1 className="text-4xl font-semibold">Travel price:</h1>
@@ -137,15 +174,27 @@ export default function Posted({}) {
           </div>
         </div>
       </div>
-      <div
+      <button
+        disabled={loading}
         href="/"
         className="w-full bg-customGray bg-opacity-40 flex justify-center py-2 text-3xl rounded-lg cursor-pointer"
         onClick={() => {
           createTravel();
+          handlePost();
         }}
       >
-        Post
-      </div>
+        {loading ? (
+          <svg
+            className="spinner-ring w-10 h-10"
+            viewBox="25 25 50 50"
+            strokeWidth="5"
+          >
+            <circle cx="50" cy="50" r="20" />
+          </svg>
+        ) : (
+          <h1>Post</h1>
+        )}
+      </button>
     </div>
   );
 }

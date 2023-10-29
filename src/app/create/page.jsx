@@ -86,7 +86,7 @@ export default function Page({ searchParams }) {
     <>
       <Nav />
       <div className="w-full bg-customBlack flex flex-col px-20 py-10">
-        <Stepper step={step} />
+        {/* <Stepper step={step} /> */}
         {searchParams.step === "one" ? (
           <Informations
             passDays={daysFromChild}

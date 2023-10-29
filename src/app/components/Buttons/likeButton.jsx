@@ -43,7 +43,8 @@ export default function likeButton({ travelId }) {
     getUserInfo();
   }, [session]);
 
-  const like = async () => {
+  const like = async (e) => {
+    e.stopPropagation();
     if (likedPosts.includes(travelId)) {
       try {
         const newLikedPosts = likedPosts.filter(
@@ -101,10 +102,10 @@ export default function likeButton({ travelId }) {
 
   return (
     <div
-      onClick={() => {
-        like();
+      onClick={(e) => {
+        like(e);
       }}
-      className="cursor-pointer w-fit px-1 py-1"
+      className="cursor-pointer w-fit px-1 py-1 z-20"
     >
       {heart ? <FcLike size={32} /> : <AiOutlineHeart size={32} />}
     </div>

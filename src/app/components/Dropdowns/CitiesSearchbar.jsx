@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Cities from "@/app/data/cities.json";
 import Link from "next/link";
 
-const CitiesSearchbar = () => {
+const CitiesSearchbar = ({ city, country }) => {
   const [inputValue, setInputValue] = useState("");
 
   const filteredCities = Cities.filter((c) => {
@@ -60,18 +60,18 @@ const CitiesSearchbar = () => {
     setInputValue(newValue);
   };
   return (
-    <div>
-      <div className="dropdown-container">
-        <div className="dropdown">
+    <div className="md:w-full">
+      <div className="dropdown-container w-full">
+        <div className="dropdown w-full">
           <label
-            className="btn btn-solid-primary my-2 px-0 w-[500px] bg-searchBarGray hover:bg-searchBarGray cursor-default pr-3"
+            className="btn btn-solid-primary my-2 px-0 w-[500px] bg-searchBarGray hover:bg-searchBarGray cursor-default pr-3 md:w-full"
             tabIndex="0"
           >
             <input
               type="text"
               className="w-full h-full px-3 outline-none rounded-lg text-white text-lg font-light"
               placeholder="Search a city..."
-              value={inputValue}
+              defaultValue={`${city}, ${country}`}
               onChange={(e) => setInputValue(e.target.value)}
             />
             <img src="/search.svg" alt="" className="w-5" />

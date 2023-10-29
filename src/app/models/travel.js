@@ -15,6 +15,7 @@ const travelSchema = new Schema(
     userName: String,
     userEmail: String,
     userImage: String,
+    userId: String,
   },
   {
     timestamps: true,

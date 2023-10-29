@@ -64,7 +64,7 @@ const CitiesSearchbar = () => {
       <div className="dropdown-container">
         <div className="dropdown border-[1px] rounded-full">
           <label
-            className="btn btn-solid-primary px-0 w-[400px] bg-transparent hover:bg-transparent cursor-default pr-3 rounded-full"
+            className="btn btn-solid-primary px-0 w-[400px] bg-gray-500 bg-opacity-10 hover:bg-transparent cursor-default pr-3 rounded-full xs:w-full"
             tabIndex="0"
           >
             <input
@@ -76,7 +76,7 @@ const CitiesSearchbar = () => {
             />
             <img src="/search.svg" alt="" className="w-5" />
           </label>
-          <div className="scroll dropdown-menu dropdown-menu-bottom-center w-full max-h-[350px] overflow-y-scroll p-2 mt-2 z-50">
+          <div className="scroll dropdown-menu dropdown-menu-bottom-center w-full max-h-[350px] overflow-y-scroll p-2 mt-2 z-40">
             {filteredCities.slice(0, 100).map((city, index) => {
               return (
                 <Link
