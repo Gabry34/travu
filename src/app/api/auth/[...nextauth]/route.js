@@ -1,11 +1,12 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
-import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs-react";
 import mongoose from "mongoose";
 import User from "@/app/models/user";
+import UserInfo from "@/app/models/userInfo";
+import connectMongoDB from "@/app/lib/mongodb";
 
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
@@ -56,7 +57,38 @@ const authOptions = {
     }),
     // Add other providers if needed
   ],
-  callbacks: {},
+  callbacks: {
+    async session({ session }) {
+      return session;
+    },
+    async signIn({ profile }) {
+      console.log(profile);
+      try {
+        await connectMongoDB();
+
+        const userExist = await User.findOne({ email: profile.email });
+
+        if (!userExist) {
+          const user = await User.create({
+            name: profile.given_name,
+            email: profile.email,
+            hashedPassword: "no password: registered with google",
+          });
+          const userInfo = await UserInfo.create({
+            email: profile.email,
+            image: profile.picture,
+            biography: "no biography",
+            likedPosts: [],
+          });
+        }
+
+        return true;
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    },
+  },
   session: {
     strategy: "jwt",
     maxAge: 24 * 60 * 60, // 24 hours

@@ -14,7 +14,7 @@ module.exports = {
       },
       colors: {
         customGray: "#888DA7",
-        customBlack: "#161616",
+        customBlack: "#09090b",
         searchBarGray: "#3B3B3B",
       },
       fontFamily: {

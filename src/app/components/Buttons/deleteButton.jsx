@@ -17,7 +17,7 @@ export default function deleteButton({ id }) {
 
   return (
     <button
-      className="w-full py-1 px-2 bg-red-500 rounded-md mt-1"
+      className="w-full py-1 px-2 bg-red-500 rounded-md mt-2"
       onClick={removeTravel}
     >
       Delete

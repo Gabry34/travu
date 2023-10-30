@@ -38,7 +38,7 @@ export default function UserDropdown({ border }) {
     <div className="w-full flex justify-end z-50">
       {session ? (
         <div
-          className={`flex items-center max-h-10 gap-[1px] bg-customBlack py-1 px-1 rounded-full ${
+          className={`flex items-center max-h-10 gap-[1px] bg-white bg-opacity-20 py-1 px-1 rounded-full ${
             border ? "border-[1px] border-gray-600" : ""
           }`}
         >

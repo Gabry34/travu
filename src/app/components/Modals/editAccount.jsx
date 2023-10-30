@@ -100,6 +100,12 @@ export default function editAccount({ userInfoId }) {
     const profileImage = selectedImage || currentImage;
     setImage(profileImage);
   };
+
+  useEffect(() => {
+    const profileImage = selectedImage || currentImage;
+    setImage(profileImage);
+  }, [handleImageChange]);
+
   return (
     <div>
       <label
@@ -124,7 +130,7 @@ export default function editAccount({ userInfoId }) {
           <div className="pt-5 flex">
             <div
               style={{
-                backgroundImage: `url(${image})`,
+                backgroundImage: `url(${selectedImage || currentImage})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}

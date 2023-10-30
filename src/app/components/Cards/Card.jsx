@@ -64,12 +64,6 @@ const Card = ({ travel, isDashboard }) => {
             </div>
           </div>
         </div>
-        {/* <button
-          className="w-full py-1 px-2 bg-blue-900 rounded-md mt-3"
-          onClick={() => goToTravelInformation(travel._id)}
-        >
-          View
-        </button> */}
         {isDashboard ? <DeleteButton id={travel._id} /> : null}
       </div>
     </div>

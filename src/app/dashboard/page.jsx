@@ -7,6 +7,7 @@ import Card from "../components/Cards/Card";
 import SkeletonCards from "../components/Cards/SkeletonCards";
 import EditAccount from "../components/Modals/editAccount";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
@@ -88,14 +89,25 @@ export default function DashboardPage() {
     <div className="w-full bg-customBlack flex flex-col gap-10">
       <div className="px-20 pt-5 flex gap-10 justify-start w-full">
         <div className="flex gap-10 justify-start w-full bg-white bg-opacity-5 px-10 py-8 rounded-3xl">
-          <div
-            style={{
-              backgroundImage: `url(${image})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-            className="w-72 h-72 rounded-full"
-          ></div>
+          <div className="w-72 h-72 rounded-full relative my-image-container">
+            {image ? (
+              <Image
+                src={image}
+                alt="Immagine"
+                layout="fill"
+                objectFit="cover"
+                className="rounded-full"
+              />
+            ) : (
+              <Image
+                src={session?.user.image}
+                alt="Immagine"
+                layout="fill"
+                objectFit="cover"
+                className="rounded-full"
+              />
+            )}
+          </div>
           <div className="flex flex-col justify-between">
             <div>
               <h1 className="text-3xl">{session?.user.name}</h1>
@@ -128,10 +140,7 @@ export default function DashboardPage() {
             </div>
           ) : (
             travelUser.map((t) => (
-              <div
-                className="w-[350px] rounded-xl bg-white bg-opacity-5 hover:bg-gray-500 hover:bg-opacity-10"
-                key={t._id}
-              >
+              <div className="w-[350px] rounded-xl" key={t._id}>
                 <Card travel={t} isDashboard={true} />
               </div>
             ))
