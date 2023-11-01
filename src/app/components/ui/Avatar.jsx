@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { RxAvatar } from "react-icons/rx";
 
 export default function Avatar({ userId }) {
   const [email, setEmail] = useState("");
@@ -56,7 +57,7 @@ export default function Avatar({ userId }) {
   }, [email]);
 
   return (
-    <div className="flex items-center gap-2 mt-2">
+    <div className="flex items-center gap-2">
       <div className="relative w-8 h-8 rounded-full overflow-hidden">
         {image ? (
           <Image
@@ -67,13 +68,7 @@ export default function Avatar({ userId }) {
             objectPosition="center center"
           />
         ) : (
-          <svg
-            className="spinner-ring w-full h-full"
-            viewBox="25 25 50 50"
-            strokeWidth="5"
-          >
-            <circle cx="50" cy="50" r="20" />
-          </svg>
+          <RxAvatar size={32} />
         )}
       </div>
     </div>

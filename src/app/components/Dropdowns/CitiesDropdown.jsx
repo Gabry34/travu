@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Cities from "@/app/data/cities.json";
 import Link from "next/link";
+import { CiMapPin } from "react-icons/ci";
+import { LiaMapPinSolid } from "react-icons/lia";
 
 const CitiesSearchbar = () => {
   const [inputValue, setInputValue] = useState("");
@@ -76,7 +78,7 @@ const CitiesSearchbar = () => {
             />
             <img src="/search.svg" alt="" className="w-5" />
           </label>
-          <div className="scroll dropdown-menu dropdown-menu-bottom-center w-full max-h-[350px] overflow-y-scroll p-2 mt-2 z-40">
+          <div className="scroll bg-customBlack border-[1px] dropdown-menu dropdown-menu-bottom-center w-full max-h-[350px] overflow-y-scroll p-2 mt-1 z-40">
             {filteredCities.slice(0, 100).map((city, index) => {
               return (
                 <Link
@@ -91,12 +93,14 @@ const CitiesSearchbar = () => {
                       country: city.country_name,
                     },
                   }}
-                  className="py-2 px-2 cursor-pointer hover:bg-zinc-700 rounded-md flex gap-3"
+                  className="py-2 px-2 cursor-pointer hover:bg-white hover:bg-opacity-5 rounded-md flex gap-3 items-center"
                 >
-                  <img src="/pin-black.svg" className="w-8" />
+                  <LiaMapPinSolid size={40} />
                   <div>
-                    <h1 className="text-2xl">{city.name}</h1>
-                    <h1 className="opacity-80">{city.country_name}</h1>
+                    <h1 className="text-xl">{city.name}</h1>
+                    <h1 className="opacity-80 text-base">
+                      {city.country_name}
+                    </h1>
                   </div>
                 </Link>
               );

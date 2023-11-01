@@ -109,12 +109,12 @@ export default function editAccount({ userInfoId }) {
   return (
     <div>
       <label
-        className="btn btn-primary flex gap-1 items-center w-fit rounded-lg bg-transparent border-[1px] border-white px-0"
+        className="btn btn-primary flex gap-1 items-center w-fit rounded-lg bg-transparent border-[1px] border-white px-0 xs:mt-2"
         htmlFor="modal-3"
         onClick={handleImage}
       >
-        <img src="/edit.svg" alt="" className="w-7" />
-        <h1 className="text-lg">Edit</h1>
+        <img src="/edit.svg" alt="" className="w-7 md:w-4" />
+        <h1 className="text-lg md:text-base xs:text-xs">Edit</h1>
       </label>
 
       <input className="modal-state" id="modal-3" type="checkbox" />

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Card from "../components/Cards/Card";
 import SkeletonCards from "../components/Cards/SkeletonCards";
 import EditAccount from "../components/Modals/editAccount";
+import LikedPosts from "../components/ui/LikedPosts";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -87,9 +88,9 @@ export default function DashboardPage() {
 
   return (
     <div className="w-full bg-customBlack flex flex-col gap-10">
-      <div className="px-20 pt-5 flex gap-10 justify-start w-full">
-        <div className="flex gap-10 justify-start w-full bg-white bg-opacity-5 px-10 py-8 rounded-3xl">
-          <div className="w-72 h-72 rounded-full relative my-image-container">
+      <div className="px-20 pt-5 flex gap-10 justify-start w-full xs:px-5">
+        <div className="h-fit flex gap-10 justify-start w-full bg-white bg-opacity-5 px-10 py-8 rounded-3xl xs:flex-col xs:gap-2">
+          <div className="w-72 h-72 rounded-full relative my-image-container md:w-52 md:h-52 xs:w-36 xs:h-36">
             {image ? (
               <Image
                 src={image}
@@ -110,15 +111,21 @@ export default function DashboardPage() {
           </div>
           <div className="flex flex-col justify-between">
             <div>
-              <h1 className="text-3xl">{session?.user.name}</h1>
-              <h1 className="text-md opacity-40">{session?.user.email}</h1>
-              <h1 className="mt-4 font-Poppins text-lg">{biography}</h1>
+              <h1 className="text-3xl md:text-2xl xs:text-xl">
+                {session?.user.name}
+              </h1>
+              <h1 className="text-md opacity-40 md:text-sm xs:text-xs">
+                {session?.user.email}
+              </h1>
+              <h1 className="mt-4 font-Poppins text-lg md:text-base md:text-sm">
+                {biography}
+              </h1>
             </div>
             <EditAccount userInfoId={userInfoId} />
           </div>
         </div>
       </div>
-      <div className="px-20 pb-10">
+      <div className="px-20 pb-10 xs:px-5">
         <h1 className="text-3xl">Your posts</h1>
         <div className="w-full flex flex-wrap pt-10 gap-5 bg-customBlack">
           {loading ? (
@@ -146,6 +153,7 @@ export default function DashboardPage() {
             ))
           )}
         </div>
+        <LikedPosts />
       </div>
     </div>
   );

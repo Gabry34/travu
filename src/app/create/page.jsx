@@ -85,7 +85,7 @@ export default function Page({ searchParams }) {
   return (
     <>
       <Nav />
-      <div className="w-full bg-customBlack flex flex-col px-20 py-10">
+      <div className="w-full bg-customBlack flex flex-col px-20 py-10 3xs:px-5">
         {/* <Stepper step={step} /> */}
         {searchParams.step === "one" ? (
           <Informations

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import ImagesSlider from "@/app/components/Modals/imagesSlider";
+import Avatar from "@/app/components/ui/Avatar";
 
 const Page = () => {
   const [lastSegment, setLastSegment] = useState();
@@ -88,14 +89,7 @@ const Page = () => {
                         {travel.title}
                       </h1>
                       <div className="flex items-center gap-2">
-                        <div
-                          style={{
-                            backgroundImage: `url(${travel.userImage})`,
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
-                          }}
-                          className="w-8 h-8"
-                        ></div>
+                        <Avatar userId={travel.userId} />
                         <h1>{travel.userName}</h1>
                       </div>
                     </div>

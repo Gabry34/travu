@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { FcLike } from "react-icons/fc";
 import { AiOutlineHeart } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 export default function likeButton({ travelId }) {
   const { data: session } = useSession();
+  const router = useRouter();
   const [userInfoId, setUserInfoId] = useState("");
   const [likedPosts, setLikedPosts] = useState([]);
   const [heart, setHeart] = useState(false);
+  const [disable, setDisable] = useState(false);
 
   const useremail = session?.user.email;
 
@@ -67,6 +70,7 @@ export default function likeButton({ travelId }) {
         if (!res.ok) {
           throw new Error("Failed to update userInfo");
         } else {
+          router.refresh();
           setHeart(!heart);
         }
       } catch (error) {
@@ -100,14 +104,23 @@ export default function likeButton({ travelId }) {
     }
   };
 
+  const buttonHandler = () => {
+    setDisable(true);
+    setTimeout(() => {
+      setDisable(false);
+    }, 2000);
+  };
+
   return (
-    <div
+    <button
+      disabled={disable}
       onClick={(e) => {
         like(e);
+        buttonHandler();
       }}
       className="cursor-pointer w-fit px-1 py-1 z-20"
     >
       {heart ? <FcLike size={32} /> : <AiOutlineHeart size={32} />}
-    </div>
+    </button>
   );
 }

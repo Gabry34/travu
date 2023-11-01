@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import Posted from "./Posted";
 
 export default function Images({ passImages }) {
   const [images, setImages] = useState([]);
@@ -40,7 +41,7 @@ export default function Images({ passImages }) {
   }, [images]);
 
   return (
-    <div className="w-full min-h-[800px] px-20 py-16 pb-7 mt-10 flex flex-col justify-between gap-10 border-[1px] border-white rounded-xl shadow-lg shadow-black">
+    <div className="w-full min-h-[800px] px-20 py-16 pb-7 mt-10 flex flex-col justify-between gap-10 border-[1px] border-white rounded-xl shadow-lg shadow-black 2xs:px-5">
       <div className="flex flex-col gap-10">
         <div className="w-full flex justify-center items-center">
           <input
@@ -91,22 +92,10 @@ export default function Images({ passImages }) {
               setError("Please insert at least one image");
             }}
           >
-            Next
+            Post
           </button>
         ) : (
-          <Link
-            className="border-[1px] border-white px-3 py-1 rounded-md"
-            href={{
-              query: {
-                step: "posted",
-              },
-            }}
-            onClick={() => {
-              localStorage.setItem("images", JSON.stringify(images));
-            }}
-          >
-            Finish
-          </Link>
+          <Posted imagesArray={images} />
         )}
       </div>
     </div>

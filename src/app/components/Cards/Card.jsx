@@ -35,7 +35,9 @@ const Card = ({ travel, isDashboard }) => {
           />
         )}
         <div className="z-10 absolute top-0 left-0 right-0 bottom-0 p-1">
-          {session ? <LikeButton travelId={travel._id} /> : null}
+          {session && travel.userEmail !== session?.user.email ? (
+            <LikeButton travelId={travel._id} />
+          ) : null}
         </div>
       </div>
       <div className="flex gap-1 flex-col justify-around px-1 w-full select-none">
@@ -64,7 +66,9 @@ const Card = ({ travel, isDashboard }) => {
             </div>
           </div>
         </div>
-        {isDashboard ? <DeleteButton id={travel._id} /> : null}
+        {isDashboard && travel.userEmail === session?.user.email ? (
+          <DeleteButton id={travel._id} />
+        ) : null}
       </div>
     </div>
   );

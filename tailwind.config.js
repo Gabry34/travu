@@ -32,8 +32,10 @@ module.exports = {
         bgImage: "url('/paesaggio')",
       },
       screens: {
+        "3xs": { max: "450px" },
+        "2xs": { max: "550px" },
         xs: { max: "750px" },
-        sm: { max: "750px" },
+        sm: { max: "820px" },
         md: { max: "1000px" },
         lg: { max: "1200px" },
         xl: { max: "1500px" },

@@ -131,7 +131,7 @@ const Page = ({ searchParams }) => {
       <div className="flex w-full px-20 pb-10 justify-center gap-5 md:px-5">
         {loading ? (
           <div className="h-[700px] flex items-center justify-center">
-            <progress className="progress w-[500px] h-3"></progress>
+            <progress className="progress w-[500px] h-3 xs:w-[250px] xs:h-2"></progress>
           </div>
         ) : (
           <div className="w-full flex flex-wrap pt-10 gap-5 bg-customBlack sm:justify-center">
@@ -143,7 +143,7 @@ const Page = ({ searchParams }) => {
               ))
             ) : (
               <div className="w-full text-center text-2xl">
-                No posts match the selected filters.
+                No posts match the selected filters or city.
               </div>
             )}
           </div>

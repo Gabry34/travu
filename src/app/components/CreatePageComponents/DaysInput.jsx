@@ -36,12 +36,14 @@ export default function daysInput({ days, onDataChange }) {
   }, []);
 
   return (
-    <div className="w-full px-20 py-16 pb-7 mt-10 flex flex-col items-center gap-10 border-[1px] border-white rounded-xl shadow-lg shadow-black">
-      <h1 className="text-2xl">Make a description of each day</h1>
+    <div className="w-full px-20 py-16 pb-7 mt-10 flex flex-col items-center gap-10 border-[1px] border-white rounded-xl shadow-lg shadow-black xs:px-5">
+      <h1 className="text-2xl text-center 2xs:text-xl">
+        Make a description of each day
+      </h1>
       <div className="w-full flex flex-col gap-5">
         {Array.from({ length: Number(days) }, (_, index) => (
           <div className="flex flex-col gap-1" key={index}>
-            <h1 className="text-2xl">Day {index + 1} (max: 350)</h1>
+            <h1 className="text-2xl 2xs:text-xl">Day {index + 1} (max: 350)</h1>
             <textarea
               className="w-full px-1 text-lg rounded-sm"
               rows={3}

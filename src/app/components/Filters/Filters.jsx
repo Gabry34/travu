@@ -27,7 +27,7 @@ export default function filter({ city, country }) {
       >
         Filters
       </label>
-      <div className="dropdown-menu w-fit md:dropdown-menu-bottom-right">
+      <div className="dropdown-menu w-fit md:dropdown-menu-bottom-right bg-customBlack border-[1px]">
         <div className="cursor-default flex flex-col gap-5 p-3">
           <h1 className="text-xl">Filters</h1>
           <div className="flex flex-col gap-1">
@@ -60,13 +60,18 @@ export default function filter({ city, country }) {
             <select
               onChange={handleMonthChange}
               value={selectedMonth}
-              className="custom-select text-white w-full rounded-sm"
+              className="custom-select text-white w-full rounded-sm bg-transparent"
+              style={{ border: "1px solid #303339" }}
             >
-              <option value="" className="">
+              <option value="" className="bg-customBlack">
                 All months
               </option>
               {months.map((month) => (
-                <option key={month.num} value={month.num} className="">
+                <option
+                  key={month.num}
+                  value={month.num}
+                  className="bg-customBlack"
+                >
                   {month.month}
                 </option>
               ))}
@@ -77,13 +82,16 @@ export default function filter({ city, country }) {
             <select
               onChange={handleYearChange}
               value={selectedYear}
-              className="w-full rounded-sm"
+              className="custom-select text-white w-full rounded-sm bg-transparent"
+              style={{ border: "1px solid #303339" }}
             >
-              <option value="" className="">
-                All years
-              </option>
+              <option className="bg-customBlack">All years</option>
               {years.map((year) => (
-                <option key={year.num} value={year.num} className="">
+                <option
+                  key={year.num}
+                  value={year.num}
+                  className="bg-customBlack"
+                >
                   {year.year}
                 </option>
               ))}
@@ -94,7 +102,8 @@ export default function filter({ city, country }) {
             <div className="flex items-center gap-1 w-full">
               <input
                 type="number"
-                className="w-full pl-1 outline-none rounded-sm"
+                className="w-full pl-1 outline-none rounded-sm bg-transparent"
+                style={{ border: "1px solid #303339" }}
                 onChange={(event) => setDuration(event.target.value)}
                 value={duration}
               />
@@ -113,7 +122,7 @@ export default function filter({ city, country }) {
                 duration: duration,
               },
             }}
-            className="text-black bg-customGray rounded-lg px-3 py-2 font-medium flex justify-center"
+            className="text-white bg-transparent border-[1px] border-gray-500 rounded-sm px-3 py-2 font-medium flex justify-center"
           >
             Submit
           </Link>

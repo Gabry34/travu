@@ -23,9 +23,18 @@ export default function editAccount() {
           >
             ✕
           </label>
-          <div className="pt-5 flex"></div>
+          {/* image slider */}
         </div>
       </div>
     </div>
   );
+}
+
+{
+  /* <label
+            htmlFor="modal-3"
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
+            ✕
+          </label> */
 }

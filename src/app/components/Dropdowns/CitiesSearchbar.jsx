@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Cities from "@/app/data/cities.json";
 import Link from "next/link";
+import { LiaMapPinSolid } from "react-icons/lia";
 
 const CitiesSearchbar = ({ city, country }) => {
   const [inputValue, setInputValue] = useState("");
@@ -61,22 +62,22 @@ const CitiesSearchbar = ({ city, country }) => {
   };
   return (
     <div className="md:w-full">
-      <div className="dropdown-container w-full">
-        <div className="dropdown w-full">
+      <div className="dropdown-container md:w-full">
+        <div className="dropdown md:w-full">
           <label
-            className="btn btn-solid-primary my-2 px-0 w-[500px] bg-searchBarGray hover:bg-searchBarGray cursor-default pr-3 md:w-full"
+            className="btn btn-solid-primary mb-1 px-0 w-[500px] bg-transparent border-[1px] rounded-md hover:bg-transparent cursor-default pr-3 md:w-full"
             tabIndex="0"
           >
             <input
               type="text"
-              className="w-full h-full px-3 outline-none rounded-lg text-white text-lg font-light"
+              className="w-full h-full px-3 outline-none rounded-lg text-white text-lg font-light bg-transparent"
               placeholder="Search a city..."
               defaultValue={`${city}, ${country}`}
               onChange={(e) => setInputValue(e.target.value)}
             />
             <img src="/search.svg" alt="" className="w-5" />
           </label>
-          <div className="scroll dropdown-menu dropdown-menu-bottom-center w-full max-h-[350px] overflow-y-scroll p-2 ">
+          <div className="scroll bg-customBlack border-[1px] dropdown-menu dropdown-menu-bottom-center w-full max-h-[350px] overflow-y-scroll p-2">
             {filteredCities.slice(0, 100).map((city, index) => {
               return (
                 <Link
@@ -91,12 +92,14 @@ const CitiesSearchbar = ({ city, country }) => {
                       country: city.country_name,
                     },
                   }}
-                  className="py-2 px-2 cursor-pointer hover:bg-zinc-700 rounded-md flex gap-3"
+                  className="py-2 px-2 cursor-pointer hover:bg-white hover:bg-opacity-5 rounded-md flex gap-3 items-center"
                 >
-                  <img src="/pin-black.svg" className="w-8" />
+                  <LiaMapPinSolid size={40} />
                   <div>
-                    <h1 className="text-2xl">{city.name}</h1>
-                    <h1 className="opacity-80">{city.country_name}</h1>
+                    <h1 className="text-xl">{city.name}</h1>
+                    <h1 className="opacity-80 text-base">
+                      {city.country_name}
+                    </h1>
                   </div>
                 </Link>
               );

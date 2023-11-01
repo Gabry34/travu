@@ -28,7 +28,7 @@ export default function MyCombobox({ passCity }) {
         onChange={(event) => setQuery(event.target.value)}
         Value={(person) => person.name}
       />
-      <Combobox.Options className="scroll w-[230px] max-h-[200px] overflow-y-scroll border-[1px] border-white">
+      <Combobox.Options className="scroll w-[230px] max-h-[200px] overflow-y-scroll border-[1px] border-white 2xs:w-full">
         {filteredPeople.slice(0, 50).map((person) => (
           <Combobox.Option key={person.id} value={person.name} as={Fragment}>
             {({ active, selected }) => (
