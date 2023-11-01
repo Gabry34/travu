@@ -124,7 +124,7 @@ const Page = ({ searchParams }) => {
             <h1 className="text-3xl xl:hidden">All Cities</h1>
           )}
         </div>
-        <div className="flex items-center justify-end gap-10 pr-5 md:justify-start">
+        <div className="flex items-center justify-end gap-10 md:justify-start">
           <Filters city={city} country={country} />
         </div>
       </div>

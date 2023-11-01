@@ -2,39 +2,83 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-export default function editAccount() {
+export default function editAccount({ images }) {
+  const [show, setShow] = useState(false);
+  const [image, setImage] = useState(0);
+
+  useEffect(() => {
+    if (show) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [show]);
   return (
     <div>
-      <label
-        className="btn btn-primary flex gap-1 items-center w-fit rounded-lg bg-transparent border-[1px] border-white px-0"
-        htmlFor="modal-3"
+      <div
+        className="flex gap-1 items-center w-fit rounded-lg bg-transparent px-0 cursor-pointer"
+        onClick={() => {
+          setShow(true);
+        }}
       >
         <Image src="/more-images.svg" width={60} height={60} />
-      </label>
+      </div>
 
-      <input className="modal-state" id="modal-3" type="checkbox" />
-      <div className="modal w-screen">
-        <label className="modal-overlay" htmlFor="modal-2"></label>
-        <div className="modal-content flex flex-col gap-5 w-full">
-          <label
-            htmlFor="modal-3"
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-          >
-            ✕
-          </label>
-          {/* image slider */}
+      <div
+        className={`grid grid-rows-3 absolute z-50 top-0 bottom-0 left-0 right-0 w-full h-full bg-black bg-opacity-90 ${
+          show ? "" : "hidden"
+        }`}
+      >
+        <div
+          onClick={() => {
+            setShow(false);
+          }}
+          className="cursor-pointer h-5 z-50 flex justify-end pr-10 pt-5"
+        >
+          <h1 className="text-4xl">✕</h1>
+        </div>
+
+        <div className="flex items-center justify-between px-5">
+          <button className="z-50" disabled={image === 0}>
+            <IoIosArrowBack
+              size={32}
+              className="cursor-pointer"
+              onClick={() => {
+                setImage(image - 1);
+              }}
+            />
+          </button>
+          <div className="w-full h-full">
+            <Image
+              src={images[image].base64URL}
+              layout="fill"
+              objectFit="contain"
+              className="rounded-xl p-20 static z-20"
+            />
+          </div>
+          <button className="z-50" disabled={image === images.length - 1}>
+            <IoIosArrowForward
+              size={32}
+              className="cursor-pointer"
+              onClick={() => {
+                setImage(image + 1);
+              }}
+            />
+          </button>
+        </div>
+
+        <div className="flex justify-center z-50 items-end pb-10">
+          <h1 className="text-xl font-semibold">
+            {image + 1} / {images.length}
+          </h1>
         </div>
       </div>
     </div>
   );
-}
-
-{
-  /* <label
-            htmlFor="modal-3"
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-          >
-            ✕
-          </label> */
 }

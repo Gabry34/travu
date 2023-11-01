@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import ImagesSlider from "@/app/components/Modals/imagesSlider";
 import Avatar from "@/app/components/ui/Avatar";
+import { GoDot } from "react-icons/go";
+import { AiOutlineLine } from "react-icons/ai";
 
 const Page = () => {
   const [lastSegment, setLastSegment] = useState();
@@ -76,7 +78,11 @@ const Page = () => {
                         backgroundPosition: "center",
                       }}
                     >
-                      {travel.images[1] ? <ImagesSlider /> : <p></p>}
+                      {travel.images[1] ? (
+                        <ImagesSlider images={travel.images} />
+                      ) : (
+                        <p></p>
+                      )}
                     </div>
                   ) : (
                     <img src="/no-image-white.svg" className="w-[500px]" />
@@ -113,11 +119,16 @@ const Page = () => {
           <progress className="progress w-[500px] h-3"></progress>
         </div>
       )}
-      <div>
+      <div className="py-10 flex flex-col gap-4">
         {daysDescriptions?.map((day, index) => (
-          <div key={index} className="flex flex-col gap-1">
-            <h1 className="text-3xl opacity-80">Day {index}</h1>
-            <p className="text-2xl">{day}</p>
+          <div className="flex gap-1">
+            <div className="pt-2">
+              <GoDot size={20} />
+            </div>
+            <div key={index} className="flex flex-col gap-1">
+              <h1 className="text-3xl opacity-80">Day {index + 1}</h1>
+              <p className="text-xl">{day}</p>
+            </div>
           </div>
         ))}
       </div>
