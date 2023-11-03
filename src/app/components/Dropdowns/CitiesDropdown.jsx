@@ -3,6 +3,7 @@ import Cities from "@/app/data/cities.json";
 import Link from "next/link";
 import { CiMapPin } from "react-icons/ci";
 import { LiaMapPinSolid } from "react-icons/lia";
+import { GoSearch } from "react-icons/go";
 
 const CitiesSearchbar = () => {
   const [inputValue, setInputValue] = useState("");
@@ -76,7 +77,7 @@ const CitiesSearchbar = () => {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             />
-            <img src="/search.svg" alt="" className="w-5" />
+            <GoSearch size={24} color="white" />
           </label>
           <div className="scroll bg-customBlack border-[1px] dropdown-menu dropdown-menu-bottom-center w-full max-h-[350px] overflow-y-scroll p-2 mt-1 z-40">
             {filteredCities.slice(0, 100).map((city, index) => {

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { PiEyeSlashLight, PiEyeLight } from "react-icons/pi";
 
 export default function passwordInput({ passPassword }) {
   const [showPassword, setShowPassword] = useState(true);
@@ -19,15 +20,15 @@ export default function passwordInput({ passPassword }) {
       />
 
       {showPassword ? (
-        <img
-          className="h-7 mr-2 cursor-pointer"
-          src="/eyeNot.svg"
+        <PiEyeSlashLight
+          size={32}
+          className="pr-2 cursor-pointer"
           onClick={togglePasswordVisibility}
         />
       ) : (
-        <img
-          className="h-8 mr-2 cursor-pointer"
-          src="/eyeShow.svg"
+        <PiEyeLight
+          size={32}
+          className="pr-2 cursor-pointer"
           onClick={togglePasswordVisibility}
         />
       )}

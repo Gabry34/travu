@@ -52,7 +52,7 @@ const Page = () => {
   }, [travelInfo]);
 
   return (
-    <div className="bg-customBlack pt-5 flex flex-col px-20">
+    <div className="bg-customBlack pt-5 flex flex-col px-20 xs:px-5">
       <div className="pb-5">
         <img
           src="/arrow-left.svg"
@@ -67,8 +67,8 @@ const Page = () => {
         <div>
           {travelInfo.map((travel) => (
             <div key={travel._id} className="w-full">
-              <div className="flex gap-4">
-                <div className="w-2/5 h-[500px] bg-gray-600 bg-opacity-10 rounded-md">
+              <div className="flex gap-4 lg:flex-col">
+                <div className="w-2/5 h-[500px] bg-gray-600 bg-opacity-10 rounded-md lg:w-full xs:h-[300px]">
                   {travel.images ? (
                     <div
                       className="h-full flex justify-end items-end p-2 rounded-md"
@@ -88,9 +88,9 @@ const Page = () => {
                     <img src="/no-image-white.svg" className="w-[500px]" />
                   )}
                 </div>
-                <div className="w-3/5 flex flex-col justify-between gap-10 py-1">
+                <div className="w-3/5 flex flex-col justify-between gap-10 py-1 lg:w-full">
                   <div className="flex flex-col gap-7">
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center xs:flex-col xs:gap-2 xs:items-start">
                       <h1 className="text-3xl first-letter:uppercase">
                         {travel.title}
                       </h1>
@@ -99,15 +99,17 @@ const Page = () => {
                         <h1>{travel.userName}</h1>
                       </div>
                     </div>
-                    <p className="text-lg first-letter:uppercase">
+                    <p className="text-lg first-letter:uppercase 2xs:text-base">
                       {travel.description}
                     </p>
                   </div>
                   <div className="flex justify-between items-center">
-                    <h1 className="text-xl">
+                    <h1 className="text-xl 2xs:text-lg">
                       {travel.startDate} - {travel.endDate}
                     </h1>
-                    <h1 className="text-xl">${travel.travelPrice}</h1>
+                    <h1 className="text-xl 2xs:text-lg">
+                      ${travel.travelPrice}
+                    </h1>
                   </div>
                 </div>
               </div>
@@ -126,8 +128,10 @@ const Page = () => {
               <GoDot size={20} />
             </div>
             <div key={index} className="flex flex-col gap-1">
-              <h1 className="text-3xl opacity-80">Day {index + 1}</h1>
-              <p className="text-xl">{day}</p>
+              <h1 className="text-3xl opacity-80 2xs:text-2xl">
+                Day {index + 1}
+              </h1>
+              <p className="text-xl 2xs:text-lg">{day}</p>
             </div>
           </div>
         ))}

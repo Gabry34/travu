@@ -35,7 +35,7 @@ const Card = ({ travel, isDashboard }) => {
           />
         )}
         <div className="z-10 absolute top-0 left-0 right-0 bottom-0 p-1">
-          {session && travel.userEmail !== session?.user.email ? (
+          {travel.userEmail !== session?.user.email ? (
             <LikeButton travelId={travel._id} />
           ) : null}
         </div>

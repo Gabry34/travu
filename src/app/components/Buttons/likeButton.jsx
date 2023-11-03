@@ -48,6 +48,11 @@ export default function likeButton({ travelId }) {
 
   const like = async (e) => {
     e.stopPropagation();
+
+    if (!session) {
+      router.push("/login");
+    }
+
     if (likedPosts.includes(travelId)) {
       try {
         const newLikedPosts = likedPosts.filter(

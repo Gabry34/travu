@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Posted from "./Posted";
+import Image from "next/image";
 
 export default function Images({ passImages }) {
   const [images, setImages] = useState([]);
@@ -57,9 +58,10 @@ export default function Images({ passImages }) {
           <div className="flex flex-wrap flex-row gap-4">
             {images.map((image, index) => (
               <div key={index} className="relative">
-                <img
+                <Image
                   src={image.base64URL}
-                  alt={`Immagine ${index}`}
+                  width={32}
+                  height={32}
                   className="w-52"
                 />
                 <button

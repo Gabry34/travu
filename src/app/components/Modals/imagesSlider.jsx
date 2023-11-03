@@ -21,13 +21,20 @@ export default function editAccount({ images }) {
   }, [show]);
   return (
     <div>
-      <div
-        className="flex gap-1 items-center w-fit rounded-lg bg-transparent px-0 cursor-pointer"
-        onClick={() => {
-          setShow(true);
-        }}
-      >
-        <Image src="/more-images.svg" width={60} height={60} />
+      <div className="flex gap-1 items-center w-fit rounded-lg bg-transparent px-0 cursor-pointer">
+        {images[1] ? (
+          <Image
+            src="/more-images.svg"
+            width={60}
+            height={60}
+            onClick={() => {
+              setShow(true);
+              window.scrollTo(0, 0);
+            }}
+          />
+        ) : (
+          <p></p>
+        )}
       </div>
 
       <div

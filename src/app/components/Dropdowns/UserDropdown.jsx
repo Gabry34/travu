@@ -3,6 +3,8 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { RxAvatar, RxHamburgerMenu } from "react-icons/rx";
 
 export default function UserDropdown({ border }) {
   const { data: session } = useSession();
@@ -42,18 +44,23 @@ export default function UserDropdown({ border }) {
             border ? "border-[1px] border-gray-600" : ""
           }`}
         >
-          <div
-            style={{ backgroundImage: `url(${image})` }}
-            className="bg-cover bg-center w-8 h-8 rounded-full"
-          ></div>
+          <div className="relative w-8 h-8 rounded-full overflow-hidden">
+            {image ? (
+              <Image
+                src={image}
+                layout="fill"
+                objectFit="cover"
+                objectPosition="center center"
+                className="rounded-full"
+              />
+            ) : (
+              <RxAvatar size={32} />
+            )}
+          </div>
           <div>
             <div className="dropdown h-9">
-              <label className="" tabIndex="0">
-                <img
-                  src={"/hamburger.svg"}
-                  className="w-10 cursor-pointer select-none"
-                  draggable={false}
-                />
+              <label className="flex justify-center mt-[5px]" tabIndex="0">
+                <RxHamburgerMenu size={24} className="mx-2 mb-2" />
               </label>
               <div
                 className={`dropdown-menu bg-customBlack w-[150px] mt-1 ${

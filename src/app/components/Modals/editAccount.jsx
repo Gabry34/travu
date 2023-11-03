@@ -142,7 +142,7 @@ export default function editAccount({ userInfoId }) {
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
-                className="input-file input-file-primary"
+                className="input-file"
               />
             </div>
           </div>
