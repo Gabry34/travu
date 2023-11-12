@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import PasswordInput from "../Inputs/passwordInput";
 import EditUser from "../Buttons/editUser";
+import { AiOutlineEdit } from "react-icons/ai";
 
 export default function editAccount({ userInfoId }) {
   const { data: session, status } = useSession();
@@ -113,7 +114,7 @@ export default function editAccount({ userInfoId }) {
         htmlFor="modal-3"
         onClick={handleImage}
       >
-        <img src="/edit.svg" alt="" className="w-7 md:w-4" />
+        <AiOutlineEdit size={20} />
         <h1 className="text-lg md:text-base xs:text-xs">Edit</h1>
       </label>
 

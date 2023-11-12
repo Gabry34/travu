@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import ImagesSlider from "@/app/components/Modals/imagesSlider";
 import Avatar from "@/app/components/ui/Avatar";
 import { GoDot } from "react-icons/go";
-import { AiOutlineLine } from "react-icons/ai";
+import { BsArrowLeft } from "react-icons/bs";
 
 const Page = () => {
   const [lastSegment, setLastSegment] = useState();
@@ -54,10 +54,9 @@ const Page = () => {
   return (
     <div className="bg-customBlack pt-5 flex flex-col px-20 xs:px-5">
       <div className="pb-5">
-        <img
-          src="/arrow-left.svg"
-          alt=""
-          className="w-10 cursor-pointer"
+        <BsArrowLeft
+          size={32}
+          className="cursor-pointer"
           onClick={() => {
             history.back(-1);
           }}
@@ -69,24 +68,20 @@ const Page = () => {
             <div key={travel._id} className="w-full">
               <div className="flex gap-4 lg:flex-col">
                 <div className="w-2/5 h-[500px] bg-gray-600 bg-opacity-10 rounded-md lg:w-full xs:h-[300px]">
-                  {travel.images ? (
-                    <div
-                      className="h-full flex justify-end items-end p-2 rounded-md"
-                      style={{
-                        backgroundImage: `url(${travel.images[0].base64URL})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }}
-                    >
-                      {travel.images[1] ? (
-                        <ImagesSlider images={travel.images} />
-                      ) : (
-                        <p></p>
-                      )}
-                    </div>
-                  ) : (
-                    <img src="/no-image-white.svg" className="w-[500px]" />
-                  )}
+                  <div
+                    className="h-full flex justify-end items-end p-2 rounded-md"
+                    style={{
+                      backgroundImage: `url(${travel.images[0].base64URL})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  >
+                    {travel.images[1] ? (
+                      <ImagesSlider images={travel.images} />
+                    ) : (
+                      <p></p>
+                    )}
+                  </div>
                 </div>
                 <div className="w-3/5 flex flex-col justify-between gap-10 py-1 lg:w-full">
                   <div className="flex flex-col gap-7">
