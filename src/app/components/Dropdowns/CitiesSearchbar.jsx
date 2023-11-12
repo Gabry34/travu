@@ -73,7 +73,7 @@ const CitiesSearchbar = ({ city, country }) => {
               type="text"
               className="w-full h-full px-3 outline-none rounded-lg text-white text-lg font-light bg-transparent"
               placeholder="Search a city..."
-              defaultValue={`${city}, ${country}`}
+              defaultValue={city ? `${city}, ${country}` : null}
               onChange={(e) => setInputValue(e.target.value)}
             />
             <GoSearch size={24} color="white" />
