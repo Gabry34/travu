@@ -169,7 +169,7 @@ export default function RegisterPage() {
 
             <input
               placeholder="Type here"
-              type="email"
+              type="text"
               required
               value={name}
               onChange={(e) => {
@@ -188,9 +188,9 @@ export default function RegisterPage() {
               type="email"
               autoComplete="email"
               required
-              value={name}
+              value={email}
               onChange={(e) => {
-                setName(e.target.value);
+                setEmail(e.target.value);
               }}
               className="input max-w-full"
             />
