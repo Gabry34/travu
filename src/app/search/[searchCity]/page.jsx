@@ -118,7 +118,7 @@ const Page = ({ searchParams }) => {
         <div className="flex justify-center items-center">
           {city ? (
             <h1 className="text-2xl text-center xl:hidden">
-              Results for '{city}, {country}'
+              Results for &apos;{city}, {country}&apos;
             </h1>
           ) : (
             <h1 className="text-3xl xl:hidden">All Cities</h1>

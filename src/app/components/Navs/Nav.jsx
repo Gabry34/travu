@@ -13,7 +13,7 @@ const Nav = () => {
           draggable={false}
           href="/"
         >
-          <Image src="/logo.svg" width={32} height={32} />
+          <Image src="/logo.svg" alt="logo" width={32} height={32} />
           <h1>travu</h1>
         </a>
       </div>

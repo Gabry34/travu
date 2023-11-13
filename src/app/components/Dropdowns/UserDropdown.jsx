@@ -48,6 +48,7 @@ export default function UserDropdown({ border }) {
             {image ? (
               <Image
                 src={image}
+                alt="image"
                 layout="fill"
                 objectFit="cover"
                 objectPosition="center center"

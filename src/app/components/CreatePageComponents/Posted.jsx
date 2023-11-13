@@ -48,7 +48,7 @@ export default function Posted({ imagesArray }) {
     };
 
     getUser();
-  }, []);
+  }, [session?.user.email]);
 
   const createTravel = async () => {
     const confirmed = confirm("Are you sure?");

@@ -25,6 +25,7 @@ export default function EditAccount({ images }) {
         {images[1] ? (
           <Image
             src="/more-images.svg"
+            alt="image"
             width={60}
             height={60}
             onClick={() => {

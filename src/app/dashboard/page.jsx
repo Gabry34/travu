@@ -71,7 +71,7 @@ export default function DashboardPage() {
     };
 
     getUserInfo();
-  }, [session]);
+  }, [session, useremail]);
 
   if (status === "loading") {
     return (

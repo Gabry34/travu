@@ -39,7 +39,7 @@ export default function Images({ passImages }) {
 
   useEffect(() => {
     passImages(images);
-  }, [images]);
+  }, [images, passImages]);
 
   return (
     <div className="w-full min-h-[800px] px-20 py-16 pb-7 mt-10 flex flex-col justify-between gap-10 border-[1px] border-white rounded-xl shadow-lg shadow-black 2xs:px-5">
@@ -60,6 +60,7 @@ export default function Images({ passImages }) {
               <div key={index} className="relative">
                 <Image
                   src={image.base64URL}
+                  alt="image"
                   width={32}
                   height={32}
                   className="w-52"

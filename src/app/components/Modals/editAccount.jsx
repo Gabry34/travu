@@ -68,7 +68,7 @@ export default function EditAccount({ userInfoId }) {
     };
 
     getUser();
-  }, []);
+  }, [session?.user.email]);
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -105,7 +105,7 @@ export default function EditAccount({ userInfoId }) {
   useEffect(() => {
     const profileImage = selectedImage || currentImage;
     setImage(profileImage);
-  }, [handleImageChange]);
+  }, [handleImageChange, currentImage, selectedImage]);
 
   return (
     <div>

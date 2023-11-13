@@ -18,8 +18,8 @@ export default function MyCombobox({ passState }) {
         });
 
   useEffect(() => {
-    passState(selectedPerson);
-  }, [selectedPerson]);
+    passCity(selectedPerson);
+  }, [selectedPerson, passCity]);
 
   return (
     <Combobox defaultValue={selectedPerson} onChange={setSelectedPerson}>

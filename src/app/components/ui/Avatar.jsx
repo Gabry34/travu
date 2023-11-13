@@ -5,6 +5,7 @@ import { RxAvatar } from "react-icons/rx";
 export default function Avatar({ userId }) {
   const [email, setEmail] = useState("");
   const [image, setImage] = useState("");
+
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -28,7 +29,7 @@ export default function Avatar({ userId }) {
     };
 
     getUser();
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     const getUserInfo = async () => {

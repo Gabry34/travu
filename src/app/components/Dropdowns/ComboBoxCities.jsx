@@ -12,7 +12,7 @@ export default function MyCombobox({ passCity }) {
 
   useEffect(() => {
     passCity(selectedPerson);
-  }, [selectedPerson]);
+  }, [selectedPerson, passCity]);
 
   const filteredPeople =
     query === ""

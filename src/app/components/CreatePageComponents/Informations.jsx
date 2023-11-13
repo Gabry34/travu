@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import ComboCities from "../Dropdowns/ComboBoxCities";
 import ComboStates from "../Dropdowns/ComboBoxStates";
 import Link from "next/link";
@@ -35,7 +35,8 @@ export default function Informations({
     const timeDifference = date2.getTime() - date1.getTime();
     const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24)) + 1;
     setDays(daysDifference);
-  }, [startDate, endDate]);
+    passDays(daysDifference);
+  }, [startDate, endDate, passDays]);
 
   const saveData = () => {
     localStorage.setItem("title", title);
@@ -71,15 +72,21 @@ export default function Informations({
     passEndDate(endDate);
   }, [endDate]);
 
-  const handleCity = (data) => {
-    passCity(data);
-    setCity(data);
-  };
+  const handleCity = useCallback(
+    (data) => {
+      passCity(data);
+      setCity(data);
+    },
+    [passCity]
+  );
 
-  const handleState = (data) => {
-    passState(data);
-    setState(data);
-  };
+  const handleState = useCallback(
+    (data) => {
+      passState(data);
+      setState(data);
+    },
+    [passState]
+  );
 
   return (
     <div className="w-full px-20 py-16 pb-7 mt-10 flex flex-col gap-10 border-[1px] border-white rounded-xl shadow-lg shadow-black xs:gap-2 2xs:px-5">

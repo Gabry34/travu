@@ -11,7 +11,7 @@ const HomeNav = () => {
         className="gap-2 font-Tenor text-3xl flex items-center pl-4 font-light select-none"
         draggable={false}
       >
-        <Image src="/logo.svg" width={32} height={32} />
+        <Image src="/logo.svg" alt="logo" width={32} height={32} />
         <h1>travu</h1>
       </a>
       <div className="flex items-center justify-center gap-5"></div>
