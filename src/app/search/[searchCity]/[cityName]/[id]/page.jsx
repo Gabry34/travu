@@ -24,7 +24,7 @@ const Page = () => {
     const getTravels = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`http://localhost:3000/api/travels`, {
+        const res = await fetch(`https://travu-psi.vercel.app/api/travels`, {
           cache: "no-store",
         });
         if (!res.ok) {

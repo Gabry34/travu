@@ -14,7 +14,7 @@ export default function UserDropdown({ border }) {
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/userInfo", {
+        const res = await fetch("https://travu-psi.vercel.app/api/userInfo", {
           cache: "no-store",
         });
         if (!res.ok) {

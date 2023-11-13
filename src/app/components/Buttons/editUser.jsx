@@ -37,23 +37,26 @@ export default function EditUser({
       if (confirmed) {
         try {
           const hashedPassword = await newHashedPassword();
-          const res = await fetch(`http://localhost:3000/api/register/${id}`, {
-            method: "PUT",
-            headers: {
-              "Content-type": "application/json",
-            },
-            body: JSON.stringify({
-              newName,
-              newHashedPassword: hashedPassword,
-            }),
-          });
+          const res = await fetch(
+            `https://travu-psi.vercel.app/api/register/${id}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-type": "application/json",
+              },
+              body: JSON.stringify({
+                newName,
+                newHashedPassword: hashedPassword,
+              }),
+            }
+          );
 
           if (!res.ok) {
             throw new Error("Failed to update register");
           } else {
             try {
               const res = await fetch(
-                `http://localhost:3000/api/userInfo/${userInfoId}`,
+                `https://travu-psi.vercel.app/api/userInfo/${userInfoId}`,
                 {
                   method: "PUT",
                   headers: {
