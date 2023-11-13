@@ -132,7 +132,7 @@ export default function DashboardPage() {
             <SkeletonCards />
           ) : travelUser.length === 0 ? (
             <div className="w-full h-[300px] flex flex-col gap-5 justify-center items-center">
-              <h1 className="text-2xl">You haven't posted anything.</h1>
+              <h1 className="text-2xl">You haven&apos;t posted anything.</h1>
               <Link
                 href={{
                   pathname: `/create`,
