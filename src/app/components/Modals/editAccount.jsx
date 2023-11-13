@@ -172,6 +172,7 @@ export default function editAccount({ userInfoId }) {
             <h1>Change biography</h1>
             <textarea
               rows="4"
+              defaultValue={currentSub}
               className="w-full px-2 py-1 outline-none rounded-md"
               onChange={(e) => {
                 setBiography(e.target.value);

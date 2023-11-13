@@ -87,7 +87,7 @@ export default function RegisterPage() {
   return (
     <div className="h-screen bg-customBlack flex justify-center items-center">
       <form
-        className="mx-auto flex w-full max-w-lg flex-col rounded-xl border border-border bg-backgroundSecondary p-4 sm:p-20"
+        className="mx-auto flex w-[400px] max-w-lg flex-col rounded-xl border border-border bg-backgroundSecondary p-4 sm:p-20"
         onSubmit={createUser}
       >
         <div className="flex w-full flex-col gap-2">

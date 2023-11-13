@@ -61,25 +61,28 @@ const authOptions = {
     async session({ session }) {
       return session;
     },
-    async signIn({ profile }) {
+    async signIn({ profile, account, isNewAccount }) {
       console.log(profile);
       try {
         await connectMongoDB();
 
-        const userExist = await User.findOne({ email: profile.email });
+        // Check if the sign-in is done with the Google provider
+        if (account.provider === "google") {
+          const userExist = await User.findOne({ email: profile.email });
 
-        if (!userExist) {
-          const user = await User.create({
-            name: profile.given_name,
-            email: profile.email,
-            hashedPassword: "no password: registered with google",
-          });
-          const userInfo = await UserInfo.create({
-            email: profile.email,
-            image: profile.picture,
-            biography: "no biography",
-            likedPosts: [],
-          });
+          if (!userExist) {
+            const user = await User.create({
+              name: profile.given_name,
+              email: profile.email,
+              hashedPassword: "no password: registered with google",
+            });
+            const userInfo = await UserInfo.create({
+              email: profile.email,
+              image: profile.picture,
+              biography: "no biography",
+              likedPosts: [],
+            });
+          }
         }
 
         return true;
