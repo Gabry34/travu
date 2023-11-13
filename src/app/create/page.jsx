@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Nav from "../components/Navs/Nav";
-import Stepper from "../components/Stepper/page";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Daysinputs from "../components/CreatePageComponents/DaysInput";
@@ -86,7 +85,6 @@ export default function Page({ searchParams }) {
     <>
       <Nav />
       <div className="w-full bg-customBlack flex flex-col px-20 py-10 3xs:px-5">
-        {/* <Stepper step={step} /> */}
         {searchParams.step === "one" ? (
           <Informations
             passDays={daysFromChild}
