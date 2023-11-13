@@ -59,7 +59,12 @@ export default function Home() {
                 }}
               >
                 <p className="m-0">Explore now</p>
-                <Image src="/arrow-right.svg" width={32} height={32} />
+                <Image
+                  src="/arrow-right.svg"
+                  alt="image"
+                  width={32}
+                  height={32}
+                />
               </Link>
             </div>
           </div>

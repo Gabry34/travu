@@ -182,7 +182,7 @@ export default function LoginPage() {
             </button>
           </div>
           <div className="items-center justify-center text-xs dark:text-gray-5 sm:px-6 flex gap-2">
-            <span className="text-white">Don't have an account?</span>
+            <span className="text-white">Don&apos;t have an account?</span>
             <a
               rel="noopener noreferrer"
               href="/register"

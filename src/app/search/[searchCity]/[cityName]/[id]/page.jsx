@@ -118,11 +118,13 @@ const Page = () => {
       )}
       <div className="py-10 flex flex-col gap-4">
         {daysDescriptions?.map((day, index) => (
-          <div className="flex gap-1">
+          <div key={index} className="flex gap-1">
+            {" "}
+            {/* Add key prop here */}
             <div className="pt-2">
               <GoDot size={20} />
             </div>
-            <div key={index} className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1">
               <h1 className="text-3xl opacity-80 2xs:text-2xl">
                 Day {index + 1}
               </h1>

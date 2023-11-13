@@ -1,12 +1,11 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-export default function daysInput({ days, onDataChange }) {
+export default function DaysInput({ days, onDataChange }) {
   const [activityInputs, setActivityInputs] = useState(
     Array.from({ length: Number(days) }, () => "")
   );
   const [error, setError] = useState("");
-  const [localData, setLocalData] = useState([]);
 
   const handleActivityInputChange = (index, value) => {
     const updatedActivityInputs = [...activityInputs];
@@ -16,7 +15,14 @@ export default function daysInput({ days, onDataChange }) {
 
   useEffect(() => {
     onDataChange(activityInputs);
-  }, [activityInputs]);
+  }, [activityInputs, onDataChange]);
+
+  useEffect(() => {
+    const localData = localStorage.getItem("daysDescriptions");
+    if (localData) {
+      setActivityInputs(JSON.parse(localData));
+    }
+  }, []);
 
   const settingStepThree = () => {
     if (activityInputs.every((input) => input.trim() !== "")) {
@@ -25,15 +31,6 @@ export default function daysInput({ days, onDataChange }) {
       setError("fill all the fields");
     }
   };
-
-  useEffect(() => {
-    // Verifica se "daysDescriptions" è presente in localStorage.
-    const localData = localStorage.getItem("daysDescriptions");
-    if (localData) {
-      // Se esiste, imposta i dati nell'array activityInputs.
-      setActivityInputs(JSON.parse(localData));
-    }
-  }, []);
 
   return (
     <div className="w-full px-20 py-16 pb-7 mt-10 flex flex-col items-center gap-10 border-[1px] border-white rounded-xl shadow-lg shadow-black xs:px-5">

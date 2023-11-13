@@ -6,7 +6,7 @@ import PasswordInput from "../Inputs/passwordInput";
 import EditUser from "../Buttons/editUser";
 import { AiOutlineEdit } from "react-icons/ai";
 
-export default function editAccount({ userInfoId }) {
+export default function EditAccount({ userInfoId }) {
   const { data: session, status } = useSession();
   const [selectedImage, setSelectedImage] = useState(null);
   const [name, setName] = useState(session?.user.name);

@@ -4,7 +4,7 @@ import { FcLike } from "react-icons/fc";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 
-export default function likeButton({ travelId }) {
+export default function LikeButton({ travelId }) {
   const { data: session } = useSession();
   const router = useRouter();
   const [userInfoId, setUserInfoId] = useState("");
@@ -44,7 +44,7 @@ export default function likeButton({ travelId }) {
     };
 
     getUserInfo();
-  }, [session]);
+  }, [session, useremail]);
 
   const like = async (e) => {
     e.stopPropagation();

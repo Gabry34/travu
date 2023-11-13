@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-export default function editAccount({ images }) {
+export default function EditAccount({ images }) {
   const [show, setShow] = useState(false);
   const [image, setImage] = useState(0);
 
@@ -64,6 +64,7 @@ export default function editAccount({ images }) {
           <div className="w-full h-full">
             <Image
               src={images[image].base64URL}
+              alt="image"
               layout="fill"
               objectFit="contain"
               className="rounded-xl p-20 static z-20"

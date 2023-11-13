@@ -3,7 +3,7 @@ import months from "@/app/data/months.json";
 import years from "@/app/data/years.json";
 import Link from "next/link";
 
-export default function filter({ city, country }) {
+export default function Filter({ city, country }) {
   const [minPrice, setMinPrice] = useState();
   const [maxPrice, setMaxPrice] = useState();
   const [selectedMonth, setSelectedMonth] = useState("");

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { PiEyeSlashLight, PiEyeLight } from "react-icons/pi";
 
-export default function passwordInput({ passPassword }) {
+export default function PasswordInput({ passPassword }) {
   const [showPassword, setShowPassword] = useState(true);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
