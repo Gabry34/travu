@@ -125,7 +125,7 @@ export default function LikeButton({ travelId }) {
       }}
       className="cursor-pointer w-fit px-1 py-1 z-20"
     >
-      {heart ? <FcLike size={32} /> : <AiOutlineHeart size={32} />}
+      {heart ? <FcLike size={32} color="blue" /> : <AiOutlineHeart size={32} />}
     </button>
   );
 }

@@ -32,7 +32,7 @@ export default function Home() {
           />
           <div className="bg-gradient-to-b from-transparent to-customBlack w-full min-h-[850px] bg-opacity-40 flex flex-col justify-between z-10 md:min-h-[600px] xs:max-h-fit xs:min-h-fit">
             <div className="pt-[250px] px-20 flex flex-col gap-8 md:pt-[150px] sm:px-5">
-              <h1 className="font-Frank font-light text-[66px] leading-[80px] xs:text-center xs:text-5xl">
+              <h1 className="font-Frank font-light text-[66px] leading-[80px] text-white xs:text-center xs:text-5xl">
                 Connecting Explorers<br></br>Through the Power of Shared
                 <br></br>
                 Travel Experiences.

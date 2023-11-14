@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "@/app/components/Cards/Card";
 import SkeletonCards from "@/app/components/Cards/SkeletonCards";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 
 export default function LikedPosts() {
@@ -63,13 +62,15 @@ export default function LikedPosts() {
 
   return (
     <div className="mt-10">
-      <h1 className="text-3xl">Liked posts</h1>
+      <h1 className="text-3xl text-white">Liked posts</h1>
       <div className="w-full flex flex-wrap pt-10 gap-5 bg-customBlack">
         {loading ? (
           <SkeletonCards />
         ) : likedTravels.length === 0 ? (
           <div className="w-full h-[300px] flex flex-col gap-5 justify-center items-center">
-            <h1 className="text-2xl">You haven&apos;t liked posts.</h1>
+            <h1 className="text-2xl text-white">
+              You haven&apos;t liked posts.
+            </h1>
           </div>
         ) : (
           likedTravels.map((t) => (

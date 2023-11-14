@@ -96,10 +96,10 @@ const CitiesSearchbar = () => {
                   }}
                   className="py-2 px-2 cursor-pointer hover:bg-white hover:bg-opacity-5 rounded-md flex gap-3 items-center"
                 >
-                  <LiaMapPinSolid size={40} />
+                  <LiaMapPinSolid size={40} color="white" />
                   <div>
-                    <h1 className="text-xl">{city.name}</h1>
-                    <h1 className="opacity-80 text-base">
+                    <h1 className="text-xl text-white">{city.name}</h1>
+                    <h1 className="opacity-80 text-base text-white">
                       {city.country_name}
                     </h1>
                   </div>

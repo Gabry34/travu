@@ -47,8 +47,10 @@ const ExampleCity = () => {
           />
           <div className="w-full h-full z-20 flex gap-3 flex-col justify-end items-center pb-10 bg-customBlack bg-opacity-30">
             <div className="flex flex-col items-center">
-              <p className="font-medium select-none">{city.country}</p>
-              <h1 className="text-4xl font-Montserrat font-semibold select-none">
+              <p className="font-medium select-none text-white">
+                {city.country}
+              </p>
+              <h1 className="text-4xl font-Montserrat font-semibold select-none text-white">
                 {city.name}
               </h1>
             </div>

@@ -34,7 +34,7 @@ const Card = ({ travel, isDashboard }) => {
             className="rounded-xl"
           />
         )}
-        <div className="z-10 absolute top-0 left-0 right-0 bottom-0 p-1">
+        <div className="z-10 absolute top-0 left-0 right-0 bottom-0 p-1 3xs:hidden">
           {travel.userEmail !== session?.user.email ? (
             <LikeButton travelId={travel._id} />
           ) : null}
@@ -43,7 +43,7 @@ const Card = ({ travel, isDashboard }) => {
       <div className="flex gap-1 flex-col justify-around px-1 w-full select-none">
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
-            <h1 className="text-xl font-medium font-Montserrat first-letter:uppercase pt-1 overflow-hidden break-words select-none">
+            <h1 className="text-xl text-white font-medium font-Montserrat first-letter:uppercase pt-1 overflow-hidden break-words select-none">
               {travel.title}
             </h1>
             <Avatar userId={travel.userId} />

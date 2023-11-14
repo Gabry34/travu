@@ -111,13 +111,13 @@ export default function DashboardPage() {
           </div>
           <div className="flex flex-col justify-between">
             <div>
-              <h1 className="text-3xl md:text-2xl xs:text-xl">
+              <h1 className="text-3xl text-white md:text-2xl xs:text-xl">
                 {session?.user.name}
               </h1>
-              <h1 className="text-md opacity-40 md:text-sm xs:text-xs">
+              <h1 className="text-md text-white opacity-40 md:text-sm xs:text-xs">
                 {session?.user.email}
               </h1>
-              <h1 className="mt-4 font-Poppins text-lg md:text-base md:text-sm">
+              <h1 className="mt-4 text-white font-Poppins text-lg md:text-base md:text-sm">
                 {biography}
               </h1>
             </div>
@@ -126,13 +126,15 @@ export default function DashboardPage() {
         </div>
       </div>
       <div className="px-20 pb-10 xs:px-5">
-        <h1 className="text-3xl">Your posts</h1>
+        <h1 className="text-3xl text-white">Your posts</h1>
         <div className="w-full flex flex-wrap pt-10 gap-5 bg-customBlack">
           {loading ? (
             <SkeletonCards />
           ) : travelUser.length === 0 ? (
             <div className="w-full h-[300px] flex flex-col gap-5 justify-center items-center">
-              <h1 className="text-2xl">You haven&apos;t posted anything.</h1>
+              <h1 className="text-2xl text-white">
+                You haven&apos;t posted anything.
+              </h1>
               <Link
                 href={{
                   pathname: `/create`,
@@ -140,7 +142,7 @@ export default function DashboardPage() {
                     step: "one",
                   },
                 }}
-                className="bg-blue-900 px-3 py-1 text-xl rounded-md"
+                className="bg-blue-900 text-white px-3 py-1 text-xl rounded-md"
               >
                 Create a post
               </Link>

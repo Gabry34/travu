@@ -56,6 +56,7 @@ const Page = () => {
       <div className="pb-5">
         <BsArrowLeft
           size={32}
+          color="white"
           className="cursor-pointer"
           onClick={() => {
             history.back(-1);
@@ -86,23 +87,23 @@ const Page = () => {
                 <div className="w-3/5 flex flex-col justify-between gap-10 py-1 lg:w-full">
                   <div className="flex flex-col gap-7">
                     <div className="flex justify-between items-center xs:flex-col xs:gap-2 xs:items-start">
-                      <h1 className="text-3xl first-letter:uppercase">
+                      <h1 className="text-3xl text-white first-letter:uppercase">
                         {travel.title}
                       </h1>
                       <div className="flex items-center gap-2">
                         <Avatar userId={travel.userId} />
-                        <h1>{travel.userName}</h1>
+                        <h1 className="text-white">{travel.userName}</h1>
                       </div>
                     </div>
-                    <p className="text-lg first-letter:uppercase 2xs:text-base">
+                    <p className="text-lg text-white first-letter:uppercase 2xs:text-base">
                       {travel.description}
                     </p>
                   </div>
                   <div className="flex justify-between items-center">
-                    <h1 className="text-xl 2xs:text-lg">
+                    <h1 className="text-xl text-white 2xs:text-lg">
                       {travel.startDate} - {travel.endDate}
                     </h1>
-                    <h1 className="text-xl 2xs:text-lg">
+                    <h1 className="text-xl text-white 2xs:text-lg">
                       ${travel.travelPrice}
                     </h1>
                   </div>
@@ -122,13 +123,13 @@ const Page = () => {
             {" "}
             {/* Add key prop here */}
             <div className="pt-2">
-              <GoDot size={20} />
+              <GoDot size={20} color="white" />
             </div>
             <div className="flex flex-col gap-1">
-              <h1 className="text-3xl opacity-80 2xs:text-2xl">
+              <h1 className="text-3xl text-white opacity-80 2xs:text-2xl">
                 Day {index + 1}
               </h1>
-              <p className="text-xl 2xs:text-lg">{day}</p>
+              <p className="text-xl text-white 2xs:text-lg">{day}</p>
             </div>
           </div>
         ))}

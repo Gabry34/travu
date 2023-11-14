@@ -103,7 +103,7 @@ export default function UserDropdown({ border }) {
             onClick={() => {
               router.push("/login");
             }}
-            className=" border-[1px] border-white px-3 py-1 rounded-md"
+            className=" border-[1px] border-white px-3 py-1 rounded-md text-white"
           >
             Log in
           </button>
@@ -111,7 +111,7 @@ export default function UserDropdown({ border }) {
             onClick={() => {
               router.push("/register");
             }}
-            className=" border-[1px] border-white px-3 py-1 rounded-md"
+            className=" border-[1px] border-white px-3 py-1 rounded-md text-white"
           >
             Sign in
           </button>

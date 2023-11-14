@@ -83,7 +83,7 @@ export default function EditAccount({ images }) {
         </div>
 
         <div className="flex justify-center z-50 items-end pb-10">
-          <h1 className="text-xl font-semibold">
+          <h1 className="text-xl text-white font-semibold">
             {image + 1} / {images.length}
           </h1>
         </div>
