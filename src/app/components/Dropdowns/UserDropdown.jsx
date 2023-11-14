@@ -61,7 +61,11 @@ export default function UserDropdown({ border }) {
           <div>
             <div className="dropdown h-9">
               <label className="flex justify-center mt-[5px]" tabIndex="0">
-                <RxHamburgerMenu size={24} className="mx-2 mb-2" />
+                <RxHamburgerMenu
+                  size={24}
+                  color="white"
+                  className="mx-2 mb-2"
+                />
               </label>
               <div
                 className={`dropdown-menu bg-customBlack w-[150px] mt-1 ${

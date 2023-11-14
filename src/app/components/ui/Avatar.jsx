@@ -69,7 +69,7 @@ export default function Avatar({ userId }) {
             objectPosition="center center"
           />
         ) : (
-          <RxAvatar size={32} />
+          <RxAvatar size={32} color="white" />
         )}
       </div>
     </div>

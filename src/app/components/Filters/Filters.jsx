@@ -29,9 +29,9 @@ export default function Filter({ city, country }) {
       </label>
       <div className="dropdown-menu w-fit md:dropdown-menu-bottom-right bg-customBlack border-[1px]">
         <div className="cursor-default flex flex-col gap-5 p-3">
-          <h1 className="text-xl">Filters</h1>
+          <h1 className="text-xl text-white">Filters</h1>
           <div className="flex flex-col gap-1">
-            <h1>Travel price</h1>
+            <h1 className="text-white">Travel price</h1>
             <div className="flex gap-2">
               <div className="flex gap-[2px] w-2/5 min-w-[130px]">
                 <h1 className="text-white font-thin">$</h1>
@@ -56,7 +56,7 @@ export default function Filter({ city, country }) {
             </div>
           </div>
           <div className="">
-            <h1>Month</h1>
+            <h1 className="text-white">Month</h1>
             <select
               onChange={handleMonthChange}
               value={selectedMonth}
@@ -78,7 +78,7 @@ export default function Filter({ city, country }) {
             </select>
           </div>
           <div className="">
-            <h1>Year</h1>
+            <h1 className="text-white">Year</h1>
             <select
               onChange={handleYearChange}
               value={selectedYear}
@@ -98,7 +98,7 @@ export default function Filter({ city, country }) {
             </select>
           </div>
           <div>
-            <h1>Travel duration</h1>
+            <h1 className="text-white">Travel duration</h1>
             <div className="flex items-center gap-1 w-full">
               <input
                 type="number"
@@ -107,7 +107,7 @@ export default function Filter({ city, country }) {
                 onChange={(event) => setDuration(event.target.value)}
                 value={duration}
               />
-              <h1>Days</h1>
+              <h1 className="text-white">Days</h1>
             </div>
           </div>
           <Link
