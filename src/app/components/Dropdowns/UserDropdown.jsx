@@ -55,7 +55,7 @@ export default function UserDropdown({ border }) {
                 className="rounded-full"
               />
             ) : (
-              <RxAvatar size={32} />
+              <RxAvatar size={32} color="white" />
             )}
           </div>
           <div>
@@ -72,12 +72,15 @@ export default function UserDropdown({ border }) {
                   border ? "border-[1px] border-gray-600" : ""
                 }`}
               >
-                <a className="dropdown-item text-sm" href="/dashboard">
+                <a
+                  className="dropdown-item text-sm text-white"
+                  href="/dashboard"
+                >
                   Dashboard
                 </a>
                 <Link
                   tabIndex="-1"
-                  className="dropdown-item text-sm"
+                  className="dropdown-item text-sm text-white"
                   href={{
                     pathname: `/create`,
                     query: {
