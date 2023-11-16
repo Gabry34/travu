@@ -119,12 +119,12 @@ export default function EditAccount({ userInfoId }) {
       </label>
 
       <input className="modal-state" id="modal-3" type="checkbox" />
-      <div className="modal w-screen bg-customBlack">
+      <div className="modal w-screen">
         <label className="modal-overlay" htmlFor="modal-2"></label>
         <div className="modal-content flex flex-col gap-5 w-full bg-black">
           <label
             htmlFor="modal-3"
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            className="btn btn-sm btn-circle text-white btn-ghost absolute right-2 top-2"
           >
             ✕
           </label>
