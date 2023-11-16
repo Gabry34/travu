@@ -155,7 +155,7 @@ export default function EditAccount({ userInfoId }) {
               onChange={(e) => {
                 setName(e.target.value);
               }}
-              className="w-full rounded-md px-2 py-1 outline-none"
+              className="w-full rounded-md px-2 py-1 outline-none bg-[#3B3B3B] text-white"
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -173,7 +173,7 @@ export default function EditAccount({ userInfoId }) {
             <textarea
               rows="4"
               defaultValue={currentSub}
-              className="w-full px-2 py-1 outline-none rounded-md"
+              className="w-full px-2 py-1 outline-none rounded-md text-white bg-[#3B3B3B]"
               onChange={(e) => {
                 setBiography(e.target.value);
               }}
