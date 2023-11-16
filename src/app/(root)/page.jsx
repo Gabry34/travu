@@ -42,7 +42,7 @@ export default function Home() {
               </div>
             </div>
             <div className="w-full pb-20 flex justify-between items-center px-20 md:hidden">
-              <p className="font-Poppins text-sm opacity-80">
+              <p className="font-Poppins text-white text-sm opacity-80">
                 Your passport to a global adventure begins here,<br></br>where
                 you can share your travel tales,<br></br>connect with fellow
                 adventurers,<br></br>and inspire a worldwide community of
@@ -58,10 +58,11 @@ export default function Home() {
                   },
                 }}
               >
-                <p className="m-0">Explore now</p>
+                <p className="m-0 text-white">Explore now</p>
                 <Image
                   src="/arrow-right.svg"
                   alt="image"
+                  color="white"
                   width={32}
                   height={32}
                 />

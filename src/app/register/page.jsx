@@ -94,7 +94,7 @@ export default function RegisterPage() {
         onSubmit={createUser}
       >
         <div className="flex w-full flex-col gap-2">
-          <p>Sign in with</p>
+          <p className="text-white">Sign in with</p>
           <div className="flex w-full flex-col gap-2">
             <button
               type="button"
@@ -248,7 +248,7 @@ export default function RegisterPage() {
 
           <div className="form-field">
             <div className="form-control">
-              <h1>You already have an account? </h1>
+              <h1 className="text-white">You already have an account? </h1>
               <a
                 className="link link-underline-hover link-primary text-sm select-none"
                 draggable={false}

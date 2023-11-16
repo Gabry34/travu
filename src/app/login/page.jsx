@@ -61,7 +61,7 @@ export default function LoginPage() {
       <div className="modal-content flex w-full flex-col gap-5 bg-[#1C1C1C] p-20">
         <div className="flex flex-col gap-2">
           <h2 className="text-center text-2xl font-semibold">Log In</h2>
-          <p className="mx-auto max-w-xs text-sm text-content2">
+          <p className="mx-auto text-white max-w-xs text-sm text-content2">
             Log in to your account to continue.
           </p>
         </div>

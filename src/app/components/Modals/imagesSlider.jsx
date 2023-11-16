@@ -33,9 +33,7 @@ export default function EditAccount({ images }) {
               window.scrollTo(0, 0);
             }}
           />
-        ) : (
-          <p></p>
-        )}
+        ) : null}
       </div>
 
       <div
@@ -49,7 +47,7 @@ export default function EditAccount({ images }) {
           }}
           className="cursor-pointer h-5 z-50 flex justify-end pr-10 pt-5"
         >
-          <h1 className="text-4xl">✕</h1>
+          <h1 className="text-4xl text-white">✕</h1>
         </div>
 
         <div className="flex items-center justify-between px-5">

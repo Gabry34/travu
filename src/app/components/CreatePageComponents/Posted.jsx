@@ -139,7 +139,7 @@ export default function Posted({ imagesArray }) {
           <circle cx="50" cy="50" r="20" />
         </svg>
       ) : (
-        <h1>Post</h1>
+        <h1 className="text-white">Post</h1>
       )}
     </button>
   );

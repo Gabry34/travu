@@ -115,7 +115,7 @@ export default function EditAccount({ userInfoId }) {
         onClick={handleImage}
       >
         <AiOutlineEdit size={20} />
-        <h1 className="text-lg md:text-base xs:text-xs">Edit</h1>
+        <h1 className="text-lg text-white md:text-base xs:text-xs">Edit</h1>
       </label>
 
       <input className="modal-state" id="modal-3" type="checkbox" />
@@ -138,7 +138,7 @@ export default function EditAccount({ userInfoId }) {
               className="min-w-[200px] h-[200px] rounded-full"
             ></div>
             <div className="flex flex-col justify-between">
-              <h1>Edit your profile image</h1>
+              <h1 className="text-white">Edit your profile image</h1>
               <input
                 type="file"
                 accept="image/*"
@@ -148,7 +148,7 @@ export default function EditAccount({ userInfoId }) {
             </div>
           </div>
           <div className="flex flex-col gap-1">
-            <h1>Change name</h1>
+            <h1 className="text-white">Change name</h1>
             <input
               type="text"
               defaultValue={session?.user.name}
@@ -160,16 +160,16 @@ export default function EditAccount({ userInfoId }) {
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex flex-col gap-1 mt-5">
-              <h1>Change password</h1>
+              <h1 className="text-white">Change password</h1>
               <PasswordInput passPassword={handlePassword} />
             </div>
             <div className="flex flex-col gap-1">
-              <h1>Confirm password</h1>
+              <h1 className="text-white">Confirm password</h1>
               <PasswordInput passPassword={handleConfirmedPassword} />
             </div>
           </div>
           <div className="flex flex-col gap-1 mt-3">
-            <h1>Change biography</h1>
+            <h1 className="text-white">Change biography</h1>
             <textarea
               rows="4"
               defaultValue={currentSub}

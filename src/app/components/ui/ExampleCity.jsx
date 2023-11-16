@@ -61,7 +61,9 @@ const ExampleCity = () => {
                 query: { city: city.name, country: city.country },
               }}
             >
-              <h1 className="select-none text-center">View travels</h1>
+              <h1 className="select-none text-white text-center">
+                View travels
+              </h1>
             </Link>
           </div>
         </div>

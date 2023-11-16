@@ -97,8 +97,8 @@ const CitiesSearchbar = ({ city, country }) => {
                 >
                   <LiaMapPinSolid size={40} />
                   <div>
-                    <h1 className="text-xl">{city.name}</h1>
-                    <h1 className="opacity-80 text-base">
+                    <h1 className="text-xl text-white">{city.name}</h1>
+                    <h1 className="opacity-80 text-white text-base">
                       {city.country_name}
                     </h1>
                   </div>

@@ -79,9 +79,7 @@ const Page = () => {
                   >
                     {travel.images[1] ? (
                       <ImagesSlider images={travel.images} />
-                    ) : (
-                      <p></p>
-                    )}
+                    ) : null}
                   </div>
                 </div>
                 <div className="w-3/5 flex flex-col justify-between gap-10 py-1 lg:w-full">

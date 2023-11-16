@@ -92,7 +92,7 @@ export default function Informations({
     <div className="w-full px-20 py-16 pb-7 mt-10 flex flex-col gap-10 border-[1px] border-white rounded-xl shadow-lg shadow-black xs:gap-2 2xs:px-5">
       {/* TITLE */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-2xl xs:text-xl">Title</h1>
+        <h1 className="text-2xl text-white xs:text-xl">Title</h1>
         <input
           type="text"
           className="w-[230px] px-1 text-lg rounded-sm 2xs:w-full"
@@ -106,18 +106,18 @@ export default function Informations({
       {/* CITY AND COUNTRY */}
       <div className="flex gap-10 sm:flex-col sm:gap-2">
         <div className="flex flex-col gap-1 sm:w-[230px] 2xs:w-full">
-          <h1 className="text-2xl xs:text-xl">City</h1>
+          <h1 className="text-2xl text-white xs:text-xl">City</h1>
           <ComboCities passCity={handleCity} />
         </div>
         <div className="flex flex-col gap-1 sm:w-[230px] 2xs:w-full">
-          <h1 className="text-2xl xs:text-xl">State</h1>
+          <h1 className="text-2xl text-white xs:text-xl">State</h1>
           <ComboStates passState={handleState} />
         </div>
       </div>
       {/* DATES */}
       <div className="flex gap-10 sm:flex-col sm:gap-2">
         <div className="flex flex-col gap-1">
-          <h1 className="text-2xl xs:text-xl">Start date</h1>
+          <h1 className="text-2xl text-white xs:text-xl">Start date</h1>
           <input
             type="date"
             className="w-[230px] px-1 text-lg rounded-sm 2xs:w-full"
@@ -132,7 +132,7 @@ export default function Informations({
           />
         </div>
         <div className="flex flex-col gap-1">
-          <h1 className="text-2xl xs:text-xl">End date</h1>
+          <h1 className="text-2xl text-white xs:text-xl">End date</h1>
           <input
             type="date"
             className="w-[230px] px-1 text-lg rounded-sm 2xs:w-full"
@@ -149,7 +149,7 @@ export default function Informations({
       </div>
       {/* TRAVEL PRICE */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-2xl xs:text-xl">Travel price</h1>
+        <h1 className="text-2xl text-white xs:text-xl">Travel price</h1>
         <div className="flex gap-1">
           <input
             type="number"
@@ -165,7 +165,9 @@ export default function Informations({
       </div>
       {/* SHORT DESCRIPTION */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-2xl xs:text-xl">Short description (max: 1500)</h1>
+        <h1 className="text-2xl text-white xs:text-xl">
+          Short description (max: 1500)
+        </h1>
         <textarea
           name=""
           id=""
