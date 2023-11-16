@@ -60,9 +60,11 @@ export default function LoginPage() {
           <div className="spinner-simple w-[100px] h-[100px]"></div>
         </div>
       ) : null}
-      <div className="w-1/5 flex flex-col gap-4">
+      <div className="w-1/5 flex flex-col gap-4 xl:w-2/5 lg:w-3/5 sm:min-w-full sm:px-32 2xs:min-w-full 2xs:px-5">
         <div className="flex flex-col gap-2">
-          <h2 className="text-center text-2xl font-semibold">Log In</h2>
+          <h2 className="text-center text-white text-2xl font-semibold">
+            Log In
+          </h2>
           <p className="mx-auto text-white max-w-xs text-sm">
             Log in to your account to continue.
           </p>
@@ -113,7 +115,7 @@ export default function LoginPage() {
           </div>
           <button
             type="submit"
-            className="w-full flex justify-center items-center py-2 rounded-lg bg-[#0072F5] cursor-pointer"
+            className="w-full flex justify-center items-center py-2 rounded-lg bg-[#0072F5] text-white cursor-pointer"
           >
             Log in
           </button>
@@ -126,7 +128,7 @@ export default function LoginPage() {
           }}
         >
           <FcGoogle size={20} />
-          <h1>Google</h1>
+          <h1 className="text-white">Google</h1>
         </button>
         <button
           className="w-full flex items-center justify-center gap-2 border py-2 rounded-lg hover:bg-white hover:bg-opacity-10"
@@ -134,8 +136,8 @@ export default function LoginPage() {
             signIn("github");
           }}
         >
-          <FaGithub size={20} />
-          <h1>Github</h1>
+          <FaGithub size={20} color="white" />
+          <h1 className="text-white">Github</h1>
         </button>
       </div>
     </div>
