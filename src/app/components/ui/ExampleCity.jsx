@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const cities = [
   {
-    name: "New York",
+    name: "New York City",
     country: "United States",
     imageSrc: "/new-york.webp",
   },
@@ -33,6 +33,20 @@ const cities = [
 const ExampleCity = () => {
   return (
     <div className="w-full flex justify-center flex-wrap gap-10 py-10 px-20 z-10 select-none sm:px-5">
+      <Link
+        className="hidden bg-white bg-opacity-10 border w-full py-3 rounded-lg md:block"
+        href={{
+          pathname: `/search/allCities`,
+          query: {
+            city: "",
+            country: "",
+          },
+        }}
+      >
+        <h1 className="text-center text-white font-Poppins">
+          See all the posts
+        </h1>
+      </Link>
       {cities.map((city, index) => (
         <div
           key={index}
