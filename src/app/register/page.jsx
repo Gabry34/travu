@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import bcrypt from "bcryptjs-react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -88,7 +90,125 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="h-screen bg-customBlack flex justify-center items-center">
+    <div className="w-screen h-screen bg-customBlack flex flex-col justify-center items-center">
+      <div className="w-1/5 flex flex-col gap-4 xl:w-2/5 lg:w-3/5 sm:min-w-full sm:px-32 2xs:min-w-full 2xs:px-5">
+        <form className="flex flex-col gap-2" onSubmit={createUser}>
+          <h1 className="text-center text-white text-xl">Sign in</h1>
+          <div className="form-field">
+            <label className="form-label text-white">Name</label>
+
+            <input
+              placeholder="Type here"
+              type="text"
+              required
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              className="input max-w-full"
+            />
+          </div>
+          <div className="form-field">
+            <label className="form-label text-white">Email address</label>
+
+            <input
+              placeholder="Type here"
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              className="input max-w-full"
+            />
+          </div>
+          <div className="form-field">
+            <label className="form-label">
+              <span className="text-white">Password</span>
+            </label>
+            <div className="form-control flex items-center bg-[#161616] border-[2px] border-[#343434] rounded-xl">
+              <input
+                placeholder="Type here"
+                type={showPassword ? "password" : "text"}
+                autoComplete="current-password"
+                required
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                className="input max-w-full border-none"
+              />
+              {showPassword ? (
+                <BsEye
+                  size={26}
+                  onClick={togglePasswordVisibility}
+                  className="mr-3"
+                />
+              ) : (
+                <BsEyeSlash
+                  size={26}
+                  onClick={togglePasswordVisibility}
+                  className="mr-3"
+                />
+              )}
+            </div>
+            {error ? (
+              <p className="text-red-500 font-extralight select-none">
+                {error}
+              </p>
+            ) : null}
+          </div>
+          <div className="form-control justify-between">
+            <button
+              type="button"
+              className="btn btn-primary w-full"
+              onClick={createUser}
+            >
+              Sign in
+            </button>
+          </div>
+        </form>
+        <div className="divider my-6 text-white text-xs text-content2">
+          or continue with
+        </div>
+        <button
+          className="w-full flex items-center justify-center gap-2 border py-2 rounded-lg hover:bg-white hover:bg-opacity-10"
+          onClick={() => {
+            signIn("google");
+          }}
+        >
+          <FcGoogle size={20} />
+          <h1 className="text-white">Google</h1>
+        </button>
+        <button
+          className="w-full flex items-center justify-center gap-2 border py-2 rounded-lg hover:bg-white hover:bg-opacity-10"
+          onClick={() => {
+            signIn("github");
+          }}
+        >
+          <FaGithub size={20} color="white" />
+          <h1 className="text-white">Github</h1>
+        </button>
+        <div className="form-control">
+          <h1 className="text-white">You already have an account? </h1>
+          <a
+            className="link link-underline-hover link-primary text-sm select-none"
+            draggable={false}
+            href="/login"
+          >
+            Log in
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+{
+  /* <div className="h-screen bg-customBlack flex justify-center items-center">
       <form
         className="mx-auto flex w-[400px] max-w-lg flex-col rounded-xl border border-border bg-backgroundSecondary p-4 sm:p-20"
         onSubmit={createUser}
@@ -260,6 +380,5 @@ export default function RegisterPage() {
           </div>
         </div>
       </form>
-    </div>
-  );
+    </div> */
 }
