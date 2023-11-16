@@ -120,7 +120,7 @@ export default function LoginPage() {
             Log in
           </button>
         </form>
-        <div className="divider text-lg">or</div>
+        <div className="divider text-lg text-white">or</div>
         <button
           className="w-full flex items-center justify-center gap-2 border py-2 rounded-lg hover:bg-white hover:bg-opacity-10"
           onClick={() => {
