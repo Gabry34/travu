@@ -71,7 +71,7 @@ export default function LoginPage() {
         </div>
         <form className="flex flex-col gap-3" onSubmit={loginUser}>
           <div className="form-field">
-            <label className="form-label">Email address</label>
+            <label className="form-label text-white">Email address</label>
             <input
               placeholder="Type here"
               id="email"
@@ -88,7 +88,7 @@ export default function LoginPage() {
             />
           </div>
           <div className="form-field">
-            <label className="form-label">
+            <label className="form-label text-white">
               <span>Password</span>
             </label>
             <div className="form-control">
