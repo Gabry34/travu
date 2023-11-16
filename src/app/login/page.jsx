@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
 export default function LoginPage() {
   const { data: session } = useSession();
@@ -53,6 +55,95 @@ export default function LoginPage() {
 
   return (
     <div className="w-screen h-screen bg-customBlack flex justify-center items-center">
+      {isLoading ? (
+        <div className="w-screen h-screen absolute bg-customBlack bg-opacity-70 flex justify-center items-center">
+          <div className="spinner-simple w-[100px] h-[100px]"></div>
+        </div>
+      ) : null}
+      <div className="w-1/5 flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-center text-2xl font-semibold">Log In</h2>
+          <p className="mx-auto text-white max-w-xs text-sm">
+            Log in to your account to continue.
+          </p>
+        </div>
+        <form className="flex flex-col gap-3" onSubmit={loginUser}>
+          <div className="form-field">
+            <label className="form-label">Email address</label>
+            <input
+              placeholder="Type here"
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              value={data.email}
+              onChange={(e) => {
+                setData({ ...data, email: e.target.value });
+              }}
+              className="input max-w-full"
+              disabled={isSubmitting}
+            />
+          </div>
+          <div className="form-field">
+            <label className="form-label">
+              <span>Password</span>
+            </label>
+            <div className="form-control">
+              <input
+                placeholder="Type here"
+                id="password"
+                name="password"
+                type={showPassword ? "password" : "text"}
+                autoComplete="current-password"
+                required
+                value={data.password}
+                onChange={(e) => {
+                  setData({ ...data, password: e.target.value });
+                }}
+                className="input max-w-full"
+                disabled={isSubmitting}
+              />
+            </div>
+            {error ? (
+              <p className="text-red-500 font-extralight select-none">
+                {error}
+              </p>
+            ) : null}
+          </div>
+          <button
+            type="submit"
+            className="w-full flex justify-center items-center py-2 rounded-lg bg-[#0072F5] cursor-pointer"
+          >
+            Log in
+          </button>
+        </form>
+        <div className="divider text-lg">or</div>
+        <button
+          className="w-full flex items-center justify-center gap-2 border py-2 rounded-lg hover:bg-white hover:bg-opacity-10"
+          onClick={() => {
+            signIn("google");
+          }}
+        >
+          <FcGoogle size={20} />
+          <h1>Google</h1>
+        </button>
+        <button
+          className="w-full flex items-center justify-center gap-2 border py-2 rounded-lg hover:bg-white hover:bg-opacity-10"
+          onClick={() => {
+            signIn("github");
+          }}
+        >
+          <FaGithub size={20} />
+          <h1>Github</h1>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+{
+  /* <div className="w-screen h-screen bg-customBlack flex justify-center items-center">
       {isLoading ? (
         <div className="w-screen h-screen absolute bg-customBlack bg-opacity-70 flex justify-center items-center">
           <div className="spinner-simple w-[100px] h-[100px]"></div>
@@ -193,6 +284,5 @@ export default function LoginPage() {
           </div>
         </form>
       </div>
-    </div>
-  );
+    </div> */
 }
