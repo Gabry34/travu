@@ -46,7 +46,7 @@ export default function EditAccount({ userInfoId }) {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await fetch("https://travu-psi.vercel.app/api/register", {
+        const res = await fetch("https://travu-chi.vercel.app/api/register", {
           cache: "no-store",
         });
         if (!res.ok) {
@@ -73,7 +73,7 @@ export default function EditAccount({ userInfoId }) {
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const res = await fetch("https://travu-psi.vercel.app/api/userInfo", {
+        const res = await fetch("https://travu-chi.vercel.app/api/userInfo", {
           cache: "no-store",
         });
         if (!res.ok) {

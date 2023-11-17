@@ -23,7 +23,7 @@ export default function LikeButton({ travelId }) {
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const res = await fetch("https://travu-psi.vercel.app/api/userInfo", {
+        const res = await fetch("https://travu-chi.vercel.app/api/userInfo", {
           cache: "no-store",
         });
         if (!res.ok) {
@@ -60,7 +60,7 @@ export default function LikeButton({ travelId }) {
         );
 
         const res = await fetch(
-          `https://travu-psi.vercel.app/api/userInfo/${userInfoId}`,
+          `https://travu-chi.vercel.app/api/userInfo/${userInfoId}`,
           {
             method: "PUT",
             headers: {
@@ -86,7 +86,7 @@ export default function LikeButton({ travelId }) {
         const newLikedPosts = [...likedPosts, travelId];
 
         const res = await fetch(
-          `https://travu-psi.vercel.app/api/userInfo/${userInfoId}`,
+          `https://travu-chi.vercel.app/api/userInfo/${userInfoId}`,
           {
             method: "PUT",
             headers: {

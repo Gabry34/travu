@@ -39,7 +39,7 @@ export default function RegisterPage() {
       try {
         setError("");
         const hashed = await bcrypt.hash(password, 10);
-        const res = await fetch("https://travu-psi.vercel.app/api/register", {
+        const res = await fetch("https://travu-chi.vercel.app/api/register", {
           method: "POST",
           headers: {
             "Content-type": "application/json",
@@ -54,7 +54,7 @@ export default function RegisterPage() {
           try {
             const randomImage = getRandomImage();
             const res = await fetch(
-              "https://travu-psi.vercel.app/api/userInfo",
+              "https://travu-chi.vercel.app/api/userInfo",
               {
                 method: "POST",
                 headers: {

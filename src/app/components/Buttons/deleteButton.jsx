@@ -9,7 +9,7 @@ const DeleteButton = ({ id }) => {
     const confirmed = confirm("Are you sure?");
     if (confirmed) {
       const res = await fetch(
-        `https://travu-psi.vercel.app/api/travels?id=${id}`,
+        `https://travu-chi.vercel.app/api/travels?id=${id}`,
         {
           method: "DELETE",
         }

@@ -28,7 +28,7 @@ export default function Posted({ imagesArray }) {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await fetch("https://travu-psi.vercel.app/api/register", {
+        const res = await fetch("https://travu-chi.vercel.app/api/register", {
           cache: "no-store",
         });
         if (!res.ok) {
@@ -55,7 +55,7 @@ export default function Posted({ imagesArray }) {
     if (confirmed) {
       handlePost();
       try {
-        const res = await fetch("https://travu-psi.vercel.app/api/travels", {
+        const res = await fetch("https://travu-chi.vercel.app/api/travels", {
           method: "POST",
           headers: {
             "Content-type": "application/json",

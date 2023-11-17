@@ -38,7 +38,7 @@ export default function EditUser({
         try {
           const hashedPassword = await newHashedPassword();
           const res = await fetch(
-            `https://travu-psi.vercel.app/api/register/${id}`,
+            `https://travu-chi.vercel.app/api/register/${id}`,
             {
               method: "PUT",
               headers: {
@@ -56,7 +56,7 @@ export default function EditUser({
           } else {
             try {
               const res = await fetch(
-                `https://travu-psi.vercel.app/api/userInfo/${userInfoId}`,
+                `https://travu-chi.vercel.app/api/userInfo/${userInfoId}`,
                 {
                   method: "PUT",
                   headers: {
