@@ -10,7 +10,6 @@ const Page = () => {
   const [lastSegment, setLastSegment] = useState();
   const [travels, setTravels] = useState([]);
   const [daysDescriptions, setDaysDescriptions] = useState([]);
-  const [openSlider, setOpenSlider] = useState(true);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
