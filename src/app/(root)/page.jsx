@@ -6,6 +6,7 @@ import CitiesDropdown from "../components/Dropdowns/CitiesDropdown";
 import HomeNav from "../components/Navs/HomeNav";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+//up
 
 export default function Home() {
   const { data: session, status } = useSession();
