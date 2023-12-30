@@ -158,16 +158,19 @@ export default function EditAccount({ userInfoId }) {
               className="w-full rounded-md px-2 py-1 outline-none bg-[#3B3B3B] text-white"
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-col gap-1 mt-5">
-              <h1 className="text-white">Change password</h1>
-              <PasswordInput passPassword={handlePassword} />
+          {session?.user?.hashedPassword !==
+            "no password: registered with google" && (
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1 mt-5">
+                <h1 className="text-white">Change password</h1>
+                <PasswordInput passPassword={handlePassword} />
+              </div>
+              <div className="flex flex-col gap-1">
+                <h1 className="text-white">Confirm password</h1>
+                <PasswordInput passPassword={handleConfirmedPassword} />
+              </div>
             </div>
-            <div className="flex flex-col gap-1">
-              <h1 className="text-white">Confirm password</h1>
-              <PasswordInput passPassword={handleConfirmedPassword} />
-            </div>
-          </div>
+          )}
           <div className="flex flex-col gap-1 mt-3">
             <h1 className="text-white">Change biography</h1>
             <textarea
