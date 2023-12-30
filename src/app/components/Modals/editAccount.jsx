@@ -157,6 +157,7 @@ export default function EditAccount({ userInfoId }) {
               }}
               className="w-full rounded-md px-2 py-1 outline-none bg-[#3B3B3B] text-white"
             />
+            {name}
           </div>
           {session?.user?.hashedPassword !==
             "no password: registered with google" && (
