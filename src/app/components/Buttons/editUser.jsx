@@ -17,7 +17,13 @@ export default function EditUser({
 }) {
   const [error, setError] = useState("");
 
-  const newName = name || currentName;
+  const newName = () => {
+    if (name === currentName) {
+      return currentName;
+    } else {
+      return name;
+    }
+  };
 
   const newHashedPassword = async () => {
     if (password) {
