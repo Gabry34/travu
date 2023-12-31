@@ -17,13 +17,13 @@ export default function EditUser({
 }) {
   const [error, setError] = useState("");
 
-  const newName = () => {
-    if (name === currentName) {
-      return currentName;
-    } else {
-      return name;
-    }
-  };
+  // const newName = () => {
+  //   if (name === currentName) {
+  //     return currentName;
+  //   } else {
+  //     return name;
+  //   }
+  // };
 
   const newHashedPassword = async () => {
     if (password) {
@@ -51,7 +51,7 @@ export default function EditUser({
                 "Content-type": "application/json",
               },
               body: JSON.stringify({
-                newName,
+                newName: "gabry",
                 newHashedPassword: hashedPassword,
               }),
             }
