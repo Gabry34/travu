@@ -148,7 +148,8 @@ export default function EditAccount({ userInfoId }) {
             </div>
           </div>
           <div className="flex flex-col gap-1">
-            <h1 className="text-white">Change name</h1>
+            <h1 className="text-white">{session?.user?.name}</h1>
+            {/* <h1 className="text-white">Change name</h1>
             <input
               type="text"
               defaultValue={session?.user.name}
@@ -156,7 +157,7 @@ export default function EditAccount({ userInfoId }) {
                 setName(e.target.value);
               }}
               className="w-full rounded-md px-2 py-1 outline-none bg-[#3B3B3B] text-white"
-            />
+            /> */}
           </div>
           {session?.user?.hashedPassword !==
             "no password: registered with google" && (
