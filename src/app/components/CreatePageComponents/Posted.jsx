@@ -22,7 +22,7 @@ export default function Posted({ imagesArray }) {
   const userImage = session?.user.image;
 
   useEffect(() => {
-    setImages(imagesArray);
+    localStorage.setItem("images", imagesArray);
   }, [imagesArray]);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export default function Posted({ imagesArray }) {
             state,
             startDate,
             endDate,
-            images,
+            images: imagesArray,
             description,
             travelPrice,
             daysDescriptions,
