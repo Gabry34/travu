@@ -41,14 +41,6 @@ export default function Images({ passImages }) {
     passImages(images);
   }, [images, passImages]);
 
-  useEffect(() => {
-    const stringifiedImages = images.map((image) =>
-      JSON.stringify({ base64URL: image.base64URL })
-    );
-
-    localStorage.setItem("images", JSON.stringify(stringifiedImages));
-  }, [images]);
-
   return (
     <div className="w-full min-h-[800px] px-20 py-16 pb-7 mt-10 flex flex-col justify-between gap-10 border-[1px] border-white rounded-xl shadow-lg shadow-black 2xs:px-5">
       <div className="flex flex-col gap-10">

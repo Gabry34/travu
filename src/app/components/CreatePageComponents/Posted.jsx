@@ -16,7 +16,7 @@ export default function Posted({ imagesArray }) {
   const description = localStorage.getItem("shortDescription");
   const travelPrice = localStorage.getItem("travelPrice");
   const daysDescriptions = JSON.parse(localStorage.getItem("daysDescriptions"));
-  const images = JSON.parse(localStorage.getItem("images"));
+  const images = imagesArray;
   const userName = session?.user.name;
   const userEmail = session?.user.email;
   const userImage = session?.user.image;
