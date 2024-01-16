@@ -7,7 +7,6 @@ export default function Posted({ imagesArray }) {
   const { data: session, status } = useSession();
   const [userId, setUserId] = useState("");
   const [loading, setLoading] = useState(false);
-  const [images, setImages] = useState([]);
 
   const title = localStorage.getItem("title");
   const city = localStorage.getItem("city");
@@ -17,6 +16,7 @@ export default function Posted({ imagesArray }) {
   const description = localStorage.getItem("shortDescription");
   const travelPrice = localStorage.getItem("travelPrice");
   const daysDescriptions = JSON.parse(localStorage.getItem("daysDescriptions"));
+  const images = JSON.parse(localStorage.getItem("images"));
   const userName = session?.user.name;
   const userEmail = session?.user.email;
   const userImage = session?.user.image;
@@ -66,7 +66,7 @@ export default function Posted({ imagesArray }) {
             state,
             startDate,
             endDate,
-            images: imagesArray,
+            images,
             description,
             travelPrice,
             daysDescriptions,
